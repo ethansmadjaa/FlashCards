@@ -38,6 +38,7 @@ class FlashcardApp(BaseWindow):
             ("📖 Study Now", self.open_study_window),
             ("➕ Add Cards", self.open_add_cards),
             ("📝 Manage Cards", self.open_card_manager),
+            ("📊 Statistics", self.open_statistics),
             ("⚙️ Settings", self.open_settings)
         ]
 
@@ -73,3 +74,10 @@ class FlashcardApp(BaseWindow):
         for widget in self.window.winfo_children():
             widget.destroy()
         SettingsWindow(self.window)
+
+    def open_statistics(self) -> None:
+        """Open statistics window"""
+        for widget in self.window.winfo_children():
+            widget.destroy()
+        from .statistics import StatisticsWindow
+        StatisticsWindow(self.window)
