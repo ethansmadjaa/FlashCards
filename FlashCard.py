@@ -1,8 +1,9 @@
 import tkinter as tk
-from tkinter import messagebox, ttk, scrolledtext, filedialog
+from tkinter import messagebox, ttk, scrolledtext
 import json
 import os
 from datetime import datetime, timedelta
+import random
 
 # File to store flashcards
 FLASHCARD_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flashcards.json")
@@ -88,7 +89,7 @@ class AddCardsWindow:
         # Add New Class button
         ttk.Button(
             entry_frame,
-            text="➕  Add New Class",
+            text="���  Add New Class",
             command=self.add_new_class,
             width=20
         ).pack(side="left", padx=5)
@@ -209,20 +210,51 @@ class AddCardsWindow:
             messagebox.showwarning("Input Error", "Please enter a class name.")
 
 
+def create_styles():
+    # Create custom styles for widgets
+    style = ttk.Style()
+
+    # Card label style
+    style.configure(
+        "Card.TLabel",
+        background="#f8f9fa",
+        padding=20,
+        font=("Arial", 16)
+    )
+
+    # Button styles
+    style.configure(
+        "Action.TButton",
+        font=("Arial", 12),
+        padding=10
+    )
+
+    style.configure(
+        "Correct.TButton",
+        font=("Arial", 12),
+        padding=10,
+        background="#28a745"
+    )
+
+    style.configure(
+        "Wrong.TButton",
+        font=("Arial", 12),
+        padding=10,
+        background="#dc3545"
+    )
+
+
 class StudyWindow:
-    def __init__(self, parent, class_name=None):
+    def __init__(self, parent, cards, class_name=None):
         self.window = tk.Toplevel(parent)
         self.window.title(f"Study: {class_name}")
 
+        self.flashcards = cards
         self.class_name = class_name
-        self.flashcards = []
         self.current_card_index = 0
         self.answer_showing = False
         self.correct_count = 0
         self.total_attempted = 0
-
-        # Load cards first
-        self.load_flashcards()
 
         # Check if we have cards
         if not self.flashcards:
@@ -237,7 +269,7 @@ class StudyWindow:
             return
 
         # If we have cards, set up the full UI
-        self.window.geometry("800x700")  # Made taller for progress bar
+        self.window.geometry("1200x900")  # Made taller for progress bar
 
         # Main container with padding and style
         self.main_container = ttk.Frame(self.window, padding=20)
@@ -302,7 +334,7 @@ class StudyWindow:
         # Styled buttons
         self.correct_button = ttk.Button(
             self.answer_frame,
-            text="✅  Correct  (↑)",
+            text="✅  Correct ",
             command=self.mark_correct,
             width=25,
             style="Correct.TButton"
@@ -311,7 +343,7 @@ class StudyWindow:
 
         self.wrong_button = ttk.Button(
             self.answer_frame,
-            text="❌  Wrong  (↓)",
+            text="��  Wrong ",
             command=self.mark_wrong,
             width=25,
             style="Wrong.TButton"
@@ -319,50 +351,12 @@ class StudyWindow:
         self.wrong_button.pack(side="left", padx=10)
 
         # Create custom styles
-        self.create_styles()
-
-        # Key bindings
-        self.window.bind('<space>', lambda e: self.toggle_answer())
-        self.window.bind('<Up>', lambda e: self.mark_correct())
-        self.window.bind('<Down>', lambda e: self.mark_wrong())
+        create_styles()
 
         # Initialize card tracking
         self.total_cards = len(self.flashcards)
         # Show first card
         self.show_current_card()
-
-    def create_styles(self):
-        # Create custom styles for widgets
-        style = ttk.Style()
-
-        # Card label style
-        style.configure(
-            "Card.TLabel",
-            background="#f8f9fa",
-            padding=20,
-            font=("Arial", 16)
-        )
-
-        # Button styles
-        style.configure(
-            "Action.TButton",
-            font=("Arial", 12),
-            padding=10
-        )
-
-        style.configure(
-            "Correct.TButton",
-            font=("Arial", 12),
-            padding=10,
-            background="#28a745"
-        )
-
-        style.configure(
-            "Wrong.TButton",
-            font=("Arial", 12),
-            padding=10,
-            background="#dc3545"
-        )
 
     def update_progress(self):
         progress = (self.total_attempted / len(self.flashcards)) * 100
@@ -568,14 +562,36 @@ class StudyWindow:
         self.answer_showing = False
 
         # Reset display
-        self.display_frame.pack(expand=True, fill="both", pady=20)
+        self.card_frame.pack(expand=True, fill="both", pady=20)
         self.button_frame.pack(fill="x", pady=10)
         self.show_answer_btn.pack(pady=10)
 
         # Shuffle cards and start over
         import random
         random.shuffle(self.flashcards)
-        self.show_flashcard()
+        self.show_current_card()
+
+
+def get_available_classes():
+    classes = set()
+    try:
+        print(f"Looking for flashcards file at: {os.path.abspath(FLASHCARD_FILE)}")
+        if os.path.exists(FLASHCARD_FILE):
+            with open(FLASHCARD_FILE, "r", encoding='utf-8') as file:
+                flashcards = json.load(file)
+                print(f"Found {len(flashcards)} cards in file")
+                for card in flashcards:
+                    if "class_name" in card:
+                        class_name = card["class_name"]
+                        classes.add(class_name)
+                        print(f"Found class: {class_name}")
+    except Exception as e:
+        print(f"Error reading classes: {str(e)}")
+        import traceback
+        traceback.print_exc()
+
+    print(f"Available classes: {classes}")
+    return classes
 
 
 class ClassSelectionWindow:
@@ -592,7 +608,7 @@ class ClassSelectionWindow:
         ).pack(pady=20)
 
         # Get available classes
-        self.classes = self.get_available_classes()
+        self.classes = get_available_classes()
 
         # Create buttons for each class
         for class_name in sorted(self.classes):
@@ -611,36 +627,33 @@ class ClassSelectionWindow:
             width=30
         ).pack(pady=20)
 
-    def get_available_classes(self):
-        classes = set()
-        try:
-            print(f"Looking for flashcards file at: {os.path.abspath(FLASHCARD_FILE)}")
-            if os.path.exists(FLASHCARD_FILE):
-                with open(FLASHCARD_FILE, "r", encoding='utf-8') as file:
-                    flashcards = json.load(file)
-                    print(f"Found {len(flashcards)} cards in file")
-                    for card in flashcards:
-                        if "class_name" in card:
-                            class_name = card["class_name"]
-                            classes.add(class_name)
-                            print(f"Found class: {class_name}")
-        except Exception as e:
-            print(f"Error reading classes: {str(e)}")
-            import traceback
-            traceback.print_exc()
-
-        print(f"Available classes: {classes}")
-        return classes
-
     def start_study(self, class_name):
         print(f"Starting study for class: {class_name}")  # Debug print
+        with open(FLASHCARD_FILE, 'r') as file:
+            all_cards = json.load(file)
+            if class_name is None:
+                # If "Study All Classes" was selected, use all cards
+                cards = all_cards
+            else:
+                # Filter cards for specific class
+                cards = [card for card in all_cards if card['class_name'].lower() == class_name.lower()]
+
+        # Shuffle the cards
+        random.shuffle(cards)
+
         self.window.destroy()
-        StudyWindow(self.window.master, class_name)
+        StudyWindow(self.window.master, cards, "All Classes" if class_name is None else class_name)
+
+
+def load_cards_for_class(class_name):
+    with open('flashcards.json', 'r') as file:
+        all_cards = json.load(file)
+        return [card for card in all_cards if card['class_name'].lower() == class_name.lower()]
 
 
 class FlashcardApp:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, parent):
+        self.root = parent
         self.root.title("Flashcard App")
         self.root.geometry("800x600")  # Increased main window size
 
@@ -679,43 +692,14 @@ class FlashcardApp:
 
     def open_study_window(self):
         # Open class selection window first
-        self.open_class_selection()
+        ClassSelectionWindow(self.root)
 
     def open_class_selection(self):
-        class_window = tk.Toplevel(self.root)
-        class_window.title("Select Class")
-        class_window.geometry("600x500")  # Increased class selection window size
+        ClassSelectionWindow(self.root)
 
-        main_frame = ttk.Frame(class_window, padding=20)
-        main_frame.pack(expand=True, fill="both")
-
-        ttk.Label(
-            main_frame,
-            text="📚  Select a Class  📚",
-            font=("Arial", 14, "bold")
-        ).pack(pady=20)
-
-        # Get available classes
-        classes = set()
-        if os.path.exists(FLASHCARD_FILE):
-            with open(FLASHCARD_FILE, "r") as file:
-                flashcards = json.load(file)
-                for card in flashcards:
-                    if "class_name" in card:
-                        classes.add(card["class_name"])
-
-        # Create buttons for each class
-        for class_name in sorted(classes):
-            ttk.Button(
-                main_frame,
-                text=f"📖  {class_name}",
-                command=lambda c=class_name: self.start_study_session(c, class_window),
-                width=30
-            ).pack(pady=5)
-
-    def start_study_session(self, class_name, class_window):
-        class_window.destroy()
-        StudyWindow(self.root, class_name)
+    def start_study_session(self, selected_class):
+        # This method can be removed as it's handled by ClassSelectionWindow
+        pass
 
     def open_card_manager(self):
         CardManagerWindow(self.root)
@@ -834,15 +818,23 @@ class CardManagerWindow:
         selected_class = self.class_var.get()
         search_term = self.search_entry.get().lower()
 
+        # Hide all items first
         for item in self.tree.get_children():
+            self.tree.detach(item)
+
+        # Show matching items
+        matching_items = []
+        for item in self.tree.get_children(''):
             values = self.tree.item(item)['values']
             class_match = selected_class == 'All Classes' or values[0] == selected_class
             search_match = not search_term or any(search_term in str(v).lower() for v in values)
 
             if class_match and search_match:
-                self.tree.reattach(item, '', 'end')
-            else:
-                self.tree.detach(item)
+                matching_items.append(item)
+
+        # Move matching items back into view
+        for index, item in enumerate(matching_items):
+            self.tree.move(item, '', index)
 
     def clear_search(self):
         self.search_entry.delete(0, tk.END)
@@ -989,6 +981,16 @@ class Card:
             self.next_review = datetime.now()
 
 
+def save_settings(new_settings):
+    try:
+        with open("settings.json", "w") as f:
+            json.dump(new_settings, f)
+        return True
+    except Exception as e:
+        print(f"Error saving settings: {str(e)}")
+        return False
+
+
 class Settings:
     def __init__(self):
         self.settings = {
@@ -1000,15 +1002,6 @@ class Settings:
 
     def load_settings(self):
         self.settings.update(safe_json_load("settings.json", {}))
-
-    def save_settings(self, new_settings):
-        try:
-            with open("settings.json", "w") as f:
-                json.dump(new_settings, f)
-            return True
-        except Exception as e:
-            print(f"Error saving settings: {str(e)}")
-            return False
 
 
 class SettingsWindow:
