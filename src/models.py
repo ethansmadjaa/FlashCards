@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, Any
-
-from .utils import save_json, safe_json_load, SETTINGS_FILE
+from .config import DEFAULT_FONT_SIZE, DEFAULT_CARDS_PER_SESSION, DEFAULT_SHOW_PROGRESS
+from .utils import save_json, safe_json_load, SETTINGS_FILE, STATS_FILE
 
 
 class Card:
@@ -38,25 +38,90 @@ def save_settings(new_settings: Dict[str, Any]) -> bool:
 class Settings:
     _instance = None
 
-    def __init__(self):
-        self.settings = None
-
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(Settings, cls).__new__(cls)
-            cls._instance.initialize()
+            cls._instance.settings = {
+                "font_size": DEFAULT_FONT_SIZE,
+                "cards_per_session": DEFAULT_CARDS_PER_SESSION,
+                "show_progress": DEFAULT_SHOW_PROGRESS
+            }
+            cls._instance.load_settings()
         return cls._instance
 
-    def initialize(self):
-        self.settings = {
-            "font_size": 12,
-            "cards_per_session": 20,
-            "show_progress": True
-        }
-        self.load_settings()
-
     def load_settings(self):
-        self.settings.update(safe_json_load(SETTINGS_FILE, {}))
+        """Load settings from file"""
+        saved_settings = safe_json_load(SETTINGS_FILE, {})
+        self.settings.update(saved_settings)
 
     def get(self, key: str, default: Any = None) -> Any:
+        """Get a setting value"""
         return self.settings.get(key, default)
+
+    def save_settings(self, new_settings: Dict[str, Any]) -> bool:
+        """Save settings to file"""
+        self.settings.update(new_settings)
+        return save_json(SETTINGS_FILE, self.settings)
+
+
+class StudyStats:
+    def __init__(self):
+        self.stats = safe_json_load(STATS_FILE, {})
+
+    def add_session(self, class_name: str, total_cards: int, correct: int, timestamp: str = None) -> None:
+        """Add a study session result"""
+        if timestamp is None:
+            timestamp = datetime.now().isoformat()
+
+        if class_name not in self.stats:
+            self.stats[class_name] = []
+
+        session = {
+            "timestamp": timestamp,
+            "total_cards": total_cards,
+            "correct": correct,
+            "accuracy": (correct / total_cards * 100) if total_cards > 0 else 0
+        }
+
+        self.stats[class_name].append(session)
+        self.save_stats()
+
+    def get_class_stats(self, class_name: str) -> Dict:
+        """Get statistics for a specific class"""
+        if class_name not in self.stats:
+            return {"sessions": 0, "avg_accuracy": 0, "total_cards": 0}
+
+        sessions = self.stats[class_name]
+        total_accuracy = sum(s["accuracy"] for s in sessions)
+        total_cards = sum(s["total_cards"] for s in sessions)
+
+        return {
+            "sessions": len(sessions),
+            "avg_accuracy": total_accuracy / len(sessions),
+            "total_cards": total_cards,
+            "history": sessions
+        }
+
+    def get_overall_stats(self) -> Dict:
+        """Get overall study statistics"""
+        total_sessions = sum(len(sessions) for sessions in self.stats.values())
+        total_cards = sum(
+            sum(s["total_cards"] for s in sessions)
+            for sessions in self.stats.values()
+        )
+        total_correct = sum(
+            sum(s["correct"] for s in sessions)
+            for sessions in self.stats.values()
+        )
+
+        return {
+            "total_sessions": total_sessions,
+            "total_cards": total_cards,
+            "total_correct": total_correct,
+            "overall_accuracy": (total_correct / total_cards * 100) if total_cards > 0 else 0,
+            "classes_studied": len(self.stats)
+        }
+
+    def save_stats(self) -> bool:
+        """Save statistics to file"""
+        return save_json(STATS_FILE, self.stats)
