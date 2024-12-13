@@ -1,12 +1,197 @@
 [
   {
-    "question": "what is the difference between logistic and linear regression ?",
-    "answer": "one is for classification and the other for predicting values",
+    "question": "What is the difference between logistic and linear regression?",
+    "answer": "Linear regression is used for predicting continuous values, whereas logistic regression is used for binary classification tasks.",
     "class_name": "machine learning"
   },
   {
-    "question": "bn,",
-    "answer": "bn,",
+    "question": "What is the purpose of feature scaling?",
+    "answer": "Feature scaling ensures that all features contribute equally to the model and speeds up convergence in gradient descent by standardizing ranges of features.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of the sigmoid function in logistic regression?",
+    "answer": "The sigmoid function maps predicted values to probabilities between 0 and 1, making logistic regression suitable for classification tasks.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is overfitting in decision trees?",
+    "answer": "Overfitting occurs when a decision tree becomes overly complex, capturing noise in the training data and performing poorly on unseen data.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the Gini Index used for in decision trees?",
+    "answer": "The Gini Index is used to measure the impurity of a dataset, helping determine the best feature for splitting data in decision trees.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "How does regularization prevent overfitting?",
+    "answer": "Regularization adds a penalty to the cost function to discourage large coefficients, reducing model complexity and improving generalization.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between pre-pruning and post-pruning?",
+    "answer": "Pre-pruning stops the tree growth early by setting constraints, while post-pruning trims branches after the tree is fully grown.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of one-vs-all classification?",
+    "answer": "One-vs-all divides a multiclass classification problem into multiple binary classification problems, one for each class.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the information gain in decision trees?",
+    "answer": "Information gain measures the reduction in entropy after a dataset is split on an attribute, guiding feature selection.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the role of hyperparameter tuning?",
+    "answer": "Hyperparameter tuning optimizes model performance by finding the best values for parameters like learning rate, regularization strength, or tree depth.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between entropy and Gini Index?",
+    "answer": "Entropy measures the disorder of a dataset, while Gini Index measures the probability of misclassification.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the decision boundary in logistic regression?",
+    "answer": "The decision boundary is the threshold where the model classifies data points into different classes based on predicted probabilities.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "Why is regularization important in logistic regression?",
+    "answer": "Regularization helps avoid overfitting by penalizing large weights, improving generalization to unseen data.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the cost function in logistic regression?",
+    "answer": "The cost function in logistic regression is the log-loss or cross-entropy, which measures the difference between predicted probabilities and actual labels.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of gradient descent?",
+    "answer": "Gradient descent minimizes the cost function by iteratively adjusting model parameters in the direction of the steepest descent.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between classification and regression trees?",
+    "answer": "Classification trees predict categorical outcomes, while regression trees predict continuous numerical values.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is feature selection in decision trees?",
+    "answer": "Feature selection identifies the most relevant features for splitting the dataset and reducing impurity.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is pruning in decision trees?",
+    "answer": "Pruning removes unnecessary branches from a decision tree to reduce overfitting and improve model generalization.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the role of the max_depth parameter in decision trees?",
+    "answer": "The max_depth parameter limits the depth of the tree, helping control overfitting by restricting the number of splits.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is a terminal node in a decision tree?",
+    "answer": "A terminal node, or leaf node, represents the final output or decision of a branch in the tree.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "How does the CART algorithm work?",
+    "answer": "CART creates binary splits using the Gini Index for classification and Mean Squared Error for regression.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is a decision tree’s root node?",
+    "answer": "The root node is the topmost node of a decision tree, representing the entire dataset before any split.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is cross-validation in machine learning?",
+    "answer": "Cross-validation splits data into training and validation sets to evaluate model performance and reduce overfitting.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of softmax regression?",
+    "answer": "Softmax regression generalizes logistic regression for multiclass classification by predicting probabilities for all classes.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the function of the train_test_split method?",
+    "answer": "The train_test_split method divides the dataset into training and testing subsets to evaluate model performance.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is ROC-AUC in model evaluation?",
+    "answer": "ROC-AUC evaluates a model's ability to distinguish between classes by plotting True Positive Rate vs. False Positive Rate.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of early stopping?",
+    "answer": "Early stopping prevents overfitting by halting training when model performance on validation data stops improving.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is a leaf node in a decision tree?",
+    "answer": "A leaf node represents the outcome or prediction at the end of a branch in the tree.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is bagging in ensemble learning?",
+    "answer": "Bagging combines predictions from multiple models trained on random subsets of data to improve performance.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is boosting in ensemble learning?",
+    "answer": "Boosting sequentially trains models to correct errors of previous models, improving overall accuracy.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is a confusion matrix?",
+    "answer": "A confusion matrix is a table that summarizes the performance of a classification model by showing true and false predictions.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of feature scaling in gradient descent?",
+    "answer": "Feature scaling ensures that features are on the same scale, leading to faster convergence during gradient descent.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between variance and bias in machine learning?",
+    "answer": "Variance measures overfitting, while bias measures underfitting in a machine learning model.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between entropy and information gain?",
+    "answer": "Entropy measures impurity, while information gain measures the reduction in impurity after a split.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of the l1_ratio in elastic net regression?",
+    "answer": "The l1_ratio balances the mix of L1 (Lasso) and L2 (Ridge) penalties in elastic net regression.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is mean squared error (MSE) in regression?",
+    "answer": "MSE measures the average squared difference between predicted and actual values in regression models.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the difference between softmax and sigmoid functions?",
+    "answer": "Sigmoid maps predictions to probabilities for binary classification, while softmax does so for multiclass classification.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is the purpose of the penalty parameter in logistic regression?",
+    "answer": "The penalty parameter specifies the type of regularization (L1, L2, or none) applied to the model.",
+    "class_name": "machine learning"
+  },
+  {
+    "question": "What is grid search in hyperparameter tuning?",
+    "answer": "Grid search exhaustively tests combinations of hyperparameters to find the best-performing configuration.",
     "class_name": "machine learning"
   }
 ]
