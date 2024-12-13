@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from .base import BaseWindow
-from ..config import SETTINGS_WINDOW_SIZE, DEFAULT_FONT_SIZE, DEFAULT_CARDS_PER_SESSION, DEFAULT_SHOW_PROGRESS
+from ..config import SETTINGS_WINDOW_SIZE, DEFAULT_FONT_SIZE, DEFAULT_CARDS_PER_SESSION, DEFAULT_SHOW_PROGRESS, ENABLE_SOUNDS
 from ..models import Settings, save_settings
 
 
@@ -43,6 +43,9 @@ class SettingsWindow(BaseWindow):
 
         # Preview Frame
         self.setup_preview_frame(main_frame)
+
+        # Sound Settings
+        self.setup_sound_settings(main_frame)
 
         # Action Buttons
         self.setup_action_buttons(main_frame)
@@ -117,6 +120,18 @@ class SettingsWindow(BaseWindow):
         )
         self.preview_label.pack(pady=10)
 
+    def setup_sound_settings(self, parent):
+        """Setup sound settings controls"""
+        frame = ttk.LabelFrame(parent, text="Sound Settings", padding=10)
+        frame.pack(fill='x', padx=20, pady=10)
+
+        self.enable_sounds_var = tk.BooleanVar(value=ENABLE_SOUNDS)
+        ttk.Checkbutton(
+            frame,
+            text="Enable Sound Effects",
+            variable=self.enable_sounds_var
+        ).pack(padx=5)
+
     def setup_action_buttons(self, parent):
         """Setup save and cancel buttons"""
         button_frame = ttk.Frame(parent)
@@ -126,14 +141,6 @@ class SettingsWindow(BaseWindow):
             button_frame,
             text="💾 Save Changes",
             command=self.save_settings,
-            style="Action.TButton",
-            width=20
-        ).pack(side='left', padx=5)
-
-        ttk.Button(
-            button_frame,
-            text="❌ Cancel",
-            command=self.window.destroy,
             style="Action.TButton",
             width=20
         ).pack(side='left', padx=5)
