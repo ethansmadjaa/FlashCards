@@ -2,73 +2,144 @@ import tkinter as tk
 from tkinter import messagebox, ttk, scrolledtext, filedialog
 import json
 import os
-import markdown
 from datetime import datetime, timedelta
 
 # File to store flashcards
-FLASHCARD_FILE = "flashcards.json"
+FLASHCARD_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flashcards.json")
+
+def initialize_files():
+    """Initialize necessary files if they don't exist"""
+    # Initialize flashcards.json
+    if not os.path.exists(FLASHCARD_FILE):
+        with open(FLASHCARD_FILE, "w") as f:
+            json.dump([], f)
+    
+    # Initialize settings.json
+    if not os.path.exists("settings.json"):
+        default_settings = {
+            "font_size": 12,
+            "cards_per_session": 20,
+            "show_progress": True
+        }
+        with open("settings.json", "w") as f:
+            json.dump(default_settings, f)
+
+def safe_json_load(file_path, default_value):
+    """Safely load JSON file with error handling"""
+    try:
+        with open(file_path, "r", encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError, IOError) as e:
+        print(f"Error loading {file_path}: {str(e)}")
+        return default_value
 
 
 class AddCardsWindow:
     def __init__(self, parent):
         self.window = tk.Toplevel(parent)
         self.window.title("Add Flashcards")
-        self.window.geometry("500x500")
-
-        # Class selection/entry
-        self.class_label = tk.Label(self.window, text="Class:", font=("Arial", 16))
-        self.class_label.pack(pady=10)
-
+        self.window.geometry("800x700")  # Increased add cards window size
+        
+        # Main container
+        main_frame = ttk.Frame(self.window, padding=20)
+        main_frame.pack(expand=True, fill="both")
+        
+        # Title
+        ttk.Label(
+            main_frame,
+            text="✨  Add New Flashcard  ✨",
+            font=("Arial", 18, "bold")
+        ).pack(pady=(0, 20))
+        
+        # Class selection
+        ttk.Label(
+            main_frame, 
+            text="Select Class : ",
+            font=("Arial", 12)
+        ).pack()
+        
         self.class_var = tk.StringVar()
         self.class_combobox = ttk.Combobox(
-            self.window,
+            main_frame,
             textvariable=self.class_var,
-            width=47
+            width=40,
+            font=("Arial", 11)
         )
         self.update_class_list()
-        self.class_combobox.pack(pady=10)
-
-        # Add new class button and entry
-        self.new_class_frame = ttk.Frame(self.window)
-        self.new_class_frame.pack(pady=5)
-
-        self.new_class_entry = ttk.Entry(self.new_class_frame, width=30)
-        self.new_class_entry.pack(side=tk.LEFT, padx=5)
-
-        self.add_class_button = ttk.Button(
-            self.new_class_frame,
-            text="Add New Class",
-            command=self.add_new_class
+        self.class_combobox.pack(pady=(0, 15))
+        
+        # Center the new class entry and button
+        entry_frame = ttk.Frame(main_frame)
+        entry_frame.pack(fill="x", pady=(0, 20))
+        
+        # Add a spacer frame on the left
+        ttk.Frame(entry_frame).pack(side="left", expand=True)
+        
+        # New class entry
+        self.new_class_entry = ttk.Entry(
+            entry_frame, 
+            width=30,
+            font=("Arial", 11)
         )
-        self.add_class_button.pack(side=tk.LEFT, padx=5)
-
-        # UI Elements
-        self.question_label = tk.Label(self.window, text="Question:", font=("Arial", 16))
-        self.question_label.pack(pady=10)
-
-        self.question_entry = scrolledtext.ScrolledText(self.window, width=50, height=5)
-        self.question_entry.pack(pady=10)
-
-        self.answer_label = tk.Label(self.window, text="Answer:", font=("Arial", 16))
-        self.answer_label.pack(pady=10)
-
-        self.answer_entry = scrolledtext.ScrolledText(self.window, width=50, height=5)
-        self.answer_entry.pack(pady=10)
-
-        self.add_button = tk.Button(self.window, text="Add Flashcard", command=self.add_flashcard)
-        self.add_button.pack(pady=10)
-
-        # Bind Return key to add_flashcard
-        self.window.bind('<Return>', lambda e: self.add_flashcard())
+        self.new_class_entry.pack(side="left")
+        
+        # Add New Class button
+        ttk.Button(
+            entry_frame,
+            text="➕  Add New Class",
+            command=self.add_new_class,
+            width=20
+        ).pack(side="left", padx=5)
+        
+        # Add a spacer frame on the right
+        ttk.Frame(entry_frame).pack(side="left", expand=True)
+        
+        # Question
+        ttk.Label(
+            main_frame, 
+            text="Question : ",
+            font=("Arial", 12)
+        ).pack()
+        
+        self.question_entry = scrolledtext.ScrolledText(
+            main_frame,
+            width=50,
+            height=5,
+            font=("Arial", 11),
+            wrap=tk.WORD  # Enable word wrapping
+        )
+        self.question_entry.pack(pady=(0, 15))
+        
+        # Answer
+        ttk.Label(
+            main_frame, 
+            text="Answer : ",
+            font=("Arial", 12)
+        ).pack()
+        
+        self.answer_entry = scrolledtext.ScrolledText(
+            main_frame,
+            width=50,
+            height=5,
+            font=("Arial", 11),
+            wrap=tk.WORD  # Enable word wrapping
+        )
+        self.answer_entry.pack(pady=(0, 20))
+        
+        # Add button
+        ttk.Button(
+            main_frame,
+            text="💾  Save Flashcard",
+            command=self.add_flashcard,
+            width=25
+        ).pack()
 
     def update_class_list(self):
         classes = set()
-        if os.path.exists(FLASHCARD_FILE):
-            with open(FLASHCARD_FILE, "r") as file:
-                flashcards = json.load(file)
-                for card in flashcards:
-                    if "class_name" in card:
-                        classes.add(card["class_name"])
+        flashcards = safe_json_load(FLASHCARD_FILE, [])
+        for card in flashcards:
+            if "class_name" in card:
+                classes.add(card["class_name"])
         self.class_combobox['values'] = sorted(list(classes))
 
     def add_flashcard(self):
@@ -77,7 +148,10 @@ class AddCardsWindow:
         class_name = self.class_var.get().strip()
 
         if not class_name:
-            messagebox.showwarning("Input Error", "Please enter a class name.")
+            messagebox.showwarning(
+                "Input Error", 
+                "❌  Please select or add a class first !"
+            )
             return
 
         if question and answer:
@@ -86,22 +160,37 @@ class AddCardsWindow:
                 with open(FLASHCARD_FILE, "r") as file:
                     flashcards = json.load(file)
 
-            flashcards.append({
+            # Format the card data
+            new_card = {
                 "question": question,
                 "answer": answer,
-                "class_name": class_name
-            })
+                "class_name": class_name,
+                "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            flashcards.append(new_card)
 
             with open(FLASHCARD_FILE, "w") as file:
-                json.dump(flashcards, file)
+                json.dump(flashcards, file, indent=4)  # Added indentation for better formatting
 
-            messagebox.showinfo("Success", "Flashcard added successfully!")
+            messagebox.showinfo(
+                "Success", 
+                "✅  Flashcard added successfully !\n\n"
+                f"Class : {class_name}\n"
+                f"Question Length : {len(question)} characters\n"
+                f"Answer Length : {len(answer)} characters"
+            )
+            
+            # Clear entries and update
             self.update_class_list()
             self.question_entry.delete("1.0", tk.END)
             self.answer_entry.delete("1.0", tk.END)
             self.question_entry.focus()
         else:
-            messagebox.showwarning("Input Error", "Please enter both a question and an answer.")
+            messagebox.showwarning(
+                "Input Error", 
+                "❌  Please enter both a question and an answer !"
+            )
 
     def add_new_class(self):
         new_class = self.new_class_entry.get().strip()
@@ -110,7 +199,7 @@ class AddCardsWindow:
             if new_class not in current_values:
                 current_values.append(new_class)
                 self.class_combobox['values'] = sorted(current_values)
-                self.class_var.set(new_class)  # Set the combobox to the new class
+                self.class_var.set(new_class)
                 self.new_class_entry.delete(0, tk.END)
             else:
                 messagebox.showinfo("Info", "This class already exists!")
@@ -121,321 +210,397 @@ class AddCardsWindow:
 class StudyWindow:
     def __init__(self, parent, class_name=None):
         self.window = tk.Toplevel(parent)
-        self.window.title(f"Study Flashcards - {class_name if class_name else 'All Classes'}")
-        self.window.geometry("800x600")
-
-        # Initialize data
+        self.window.title(f"Study: {class_name}")
+        
         self.class_name = class_name
         self.flashcards = []
-        self.current_index = 0
+        self.current_card_index = 0
         self.answer_showing = False
-        self.seen_cards = set()
         self.correct_count = 0
         self.total_attempted = 0
-
-        # Load flashcards first
+        
+        # Load cards first
         self.load_flashcards()
-
+        
+        # Check if we have cards
         if not self.flashcards:
-            messagebox.showinfo("No Flashcards", "Please add some flashcards first!")
-            self.window.destroy()
+            # Show no cards message in the existing window
+            self.window.geometry("400x200")
+            ttk.Label(
+                self.window,
+                text=f"No flashcards found for class: {class_name}\nPlease add some flashcards first!",
+                font=("Arial", 12),
+                justify="center"
+            ).pack(expand=True)
             return
-
-        # Main container
-        self.main_container = ttk.Frame(self.window, padding="20")
-        self.main_container.pack(fill=tk.BOTH, expand=True)
-
-        # Progress section
+            
+        # If we have cards, set up the full UI
+        self.window.geometry("800x700")  # Made taller for progress bar
+        
+        # Main container with padding and style
+        self.main_container = ttk.Frame(self.window, padding=20)
+        self.main_container.pack(expand=True, fill="both")
+        
+        # Progress bar frame
         self.progress_frame = ttk.Frame(self.main_container)
-        self.progress_frame.pack(fill=tk.X, pady=(0, 20))
-
-        # Add a container to center the progress bar and label
-        self.progress_center_frame = ttk.Frame(self.progress_frame)
-        self.progress_center_frame.pack(expand=True)
-
-        self.progress_bar = ttk.Progressbar(
-            self.progress_center_frame,
-            length=300,
-            mode='determinate'
-        )
-        self.progress_bar.pack(side=tk.LEFT, padx=10)
-
+        self.progress_frame.pack(fill='x', pady=(0, 20))
+        
+        # Progress label
         self.progress_label = ttk.Label(
-            self.progress_center_frame,
-            text="0%"
+            self.progress_frame,
+            text="Progress: 0%",
+            font=("Arial", 10)
         )
-        self.progress_label.pack(side=tk.LEFT)
-
-        # Card display
-        self.display_label = tk.Label(
-            self.main_container,
-            text="",
-            font=("Arial", 18),
-            wraplength=600,
-            justify=tk.CENTER,
-            bg="white",
-            relief="raised",
-            padx=20,
-            pady=20
+        self.progress_label.pack(side='top', pady=(0, 5))
+        
+        # Progress bar
+        self.progress_bar = ttk.Progressbar(
+            self.progress_frame,
+            mode='determinate',
+            length=700
         )
-        self.display_label.pack(fill=tk.BOTH, expand=True, pady=20)
-
-        # Control buttons
+        self.progress_bar.pack(fill='x')
+        
+        # Card frame with border and padding
+        self.card_frame = ttk.Frame(self.main_container, relief="solid", borderwidth=1)
+        self.card_frame.pack(expand=True, fill="both", pady=20)
+        
+        # Card content frame
+        self.content_frame = ttk.Frame(self.card_frame, padding=20)
+        self.content_frame.pack(expand=True, fill="both")
+        
+        # Card display with better styling
+        self.display_label = ttk.Label(
+            self.content_frame,
+            text="Loading cards...",
+            font=("Arial", 16),
+            wraplength=700,
+            justify="center",
+            style="Card.TLabel"
+        )
+        self.display_label.pack(expand=True)
+        
+        # Button frame with better spacing
         self.button_frame = ttk.Frame(self.main_container)
-        self.button_frame.pack(fill=tk.X, pady=10)
-
-        self.show_answer_button = ttk.Button(
+        self.button_frame.pack(pady=20)
+        
+        # Show Answer button with style
+        self.show_answer_btn = ttk.Button(
             self.button_frame,
-            text="Show Answer (Space)",
-            command=self.toggle_answer
+            text="🔍  Show Answer  (Space)",
+            command=self.toggle_answer,
+            width=30,
+            style="Action.TButton"
         )
-        self.show_answer_button.pack(pady=10)
-
-        # Study controls
-        self.study_frame = ttk.Frame(self.main_container)
-        self.study_frame.pack(pady=10)
-
+        self.show_answer_btn.pack(pady=10)
+        
+        # Answer buttons frame
+        self.answer_frame = ttk.Frame(self.button_frame)
+        
+        # Styled buttons
         self.correct_button = ttk.Button(
-            self.study_frame,
-            text="Correct (↑)",
+            self.answer_frame,
+            text="✅  Correct  (↑)",
             command=self.mark_correct,
+            width=25,
             style="Correct.TButton"
         )
-        self.correct_button.pack(side=tk.LEFT, padx=5)
-
+        self.correct_button.pack(side="left", padx=10)
+        
         self.wrong_button = ttk.Button(
-            self.study_frame,
-            text="Wrong (↓)",
+            self.answer_frame,
+            text="❌  Wrong  (↓)",
             command=self.mark_wrong,
+            width=25,
             style="Wrong.TButton"
         )
-        self.wrong_button.pack(side=tk.LEFT, padx=5)
-
-        # Stats display
-        self.stats_label = tk.Label(
-            self.main_container,
-            text="",
-            font=("Arial", 12)
-        )
-        self.stats_label.pack(pady=10)
-
-        # Completion frame (initially hidden)
-        self.completion_frame = ttk.Frame(self.main_container)
-        self.final_stats_label = tk.Label(
-            self.completion_frame,
-            text="",
-            font=("Arial", 16),
-            wraplength=400
-        )
-        self.final_stats_label.pack(pady=20)
-
-        self.restart_button = ttk.Button(
-            self.completion_frame,
-            text="Study Again",
-            command=self.restart_study
-        )
-        self.restart_button.pack(pady=10)
-
-        self.close_button = ttk.Button(
-            self.completion_frame,
-            text="Close",
-            command=self.window.destroy
-        )
-        self.close_button.pack(pady=10)
-
-        # Keyboard bindings
-        self.window.bind('<Right>', lambda e: self.next_flashcard())
+        self.wrong_button.pack(side="left", padx=10)
+        
+        # Create custom styles
+        self.create_styles()
+        
+        # Key bindings
         self.window.bind('<space>', lambda e: self.toggle_answer())
         self.window.bind('<Up>', lambda e: self.mark_correct())
         self.window.bind('<Down>', lambda e: self.mark_wrong())
+        
+        # Initialize card tracking
+        self.total_cards = len(self.flashcards)
+        # Show first card
+        self.show_current_card()
 
-        # Show first card and update progress
-        self.show_flashcard()
-        self.update_progress()
+    def create_styles(self):
+        # Create custom styles for widgets
+        style = ttk.Style()
+        
+        # Card label style
+        style.configure(
+            "Card.TLabel",
+            background="#f8f9fa",
+            padding=20,
+            font=("Arial", 16)
+        )
+        
+        # Button styles
+        style.configure(
+            "Action.TButton",
+            font=("Arial", 12),
+            padding=10
+        )
+        
+        style.configure(
+            "Correct.TButton",
+            font=("Arial", 12),
+            padding=10,
+            background="#28a745"
+        )
+        
+        style.configure(
+            "Wrong.TButton",
+            font=("Arial", 12),
+            padding=10,
+            background="#dc3545"
+        )
 
     def update_progress(self):
-        if self.flashcards:
-            progress = (len(self.seen_cards) / len(self.flashcards)) * 100
-            self.progress_bar['value'] = progress
-            self.progress_label.config(text=f"{progress:.0f}%")
+        progress = (self.total_attempted / len(self.flashcards)) * 100
+        self.progress_bar['value'] = progress
+        self.progress_label.config(
+            text=f"Progress: {progress:.1f}% ({self.total_attempted}/{len(self.flashcards)} cards)"
+        )
 
     def load_flashcards(self):
-        if os.path.exists(FLASHCARD_FILE):
-            with open(FLASHCARD_FILE, "r") as file:
-                all_flashcards = json.load(file)
-                if self.class_name:
-                    self.flashcards = [
-                        card for card in all_flashcards
-                        if card.get("class_name") == self.class_name
-                    ]
-                else:
-                    self.flashcards = all_flashcards
-
-    def show_flashcard(self):
-        if self.flashcards:
-            flashcard = self.flashcards[self.current_index]
-            card_count = f"Card {self.current_index + 1} of {len(self.flashcards)}"
-            self.display_label.config(
-                text=f"{card_count}\n\nQ: {flashcard['question']}"
-            )
-        else:
-            self.display_label.config(text="No flashcards available.")
-
-    def next_flashcard(self):
-        if not self.flashcards:
-            messagebox.showinfo("No Flashcards", "No flashcards to display.")
-            return
-
-        # Add current card to seen cards
-        self.seen_cards.add(self.current_index)
-
-        # Update progress bar
-        self.update_progress()
-
-        # Check if all cards have been seen
-        if len(self.seen_cards) >= len(self.flashcards):
-            self.show_completion_screen()
-            return
-
-        # Find the next unseen card
-        for i in range(len(self.flashcards)):
-            next_index = (self.current_index + i + 1) % len(self.flashcards)
-            if next_index not in self.seen_cards:
-                self.current_index = next_index
-                self.answer_showing = False
-                self.show_flashcard()
+        try:
+            # Debug: Print current working directory and full file path
+            print(f"Current directory: {os.getcwd()}")
+            print(f"Looking for file: {os.path.abspath(FLASHCARD_FILE)}")
+            
+            if not os.path.exists(FLASHCARD_FILE):
+                print(f"Error: {FLASHCARD_FILE} not found!")
+                self.flashcards = []
                 return
+                
+            with open(FLASHCARD_FILE, "r", encoding='utf-8') as file:
+                all_flashcards = json.load(file)
+                print(f"Loading cards for class: {self.class_name}")
+                print(f"Total cards in file: {len(all_flashcards)}")
+                
+                # Filter cards for this class
+                self.flashcards = [
+                    card for card in all_flashcards 
+                    if card.get("class_name", "").lower() == self.class_name.lower()  # Case-insensitive comparison
+                ]
+                
+                if self.flashcards:
+                    print(f"Found {len(self.flashcards)} cards for class {self.class_name}")
+                    print(f"First card: {self.flashcards[0]}")
+                else:
+                    print(f"No cards found for class: {self.class_name}")
+                
+        except Exception as e:
+            print(f"Error loading flashcards: {str(e)}")
+            import traceback
+            traceback.print_exc()  # Print full error traceback
+            self.flashcards = []
 
-        # If we get here, all cards have been seen
-        self.show_completion_screen()
+    def show_current_card(self):
+        if not self.flashcards:
+            self.display_label.config(
+                text=f"No flashcards found for class: {self.class_name}\n"
+                "Please add some flashcards first!"
+            )
+            return
+            
+        try:
+            current_card = self.flashcards[self.current_card_index]
+            card_count = f"Card {self.current_card_index + 1} of {len(self.flashcards)}"
+            
+            if self.answer_showing:
+                self.display_label.config(
+                    text=f"📝  {card_count}\n\n"
+                        f"❓  Question:\n{current_card['question']}\n\n"
+                        f"💡  Answer:\n{current_card['answer']}"
+                )
+                self.answer_frame.pack()
+            else:
+                self.display_label.config(
+                    text=f"📝  {card_count}\n\n"
+                        f"❓  Question:\n{current_card['question']}"
+                )
+                self.answer_frame.pack_forget()
+                
+            # Update progress bar
+            self.update_progress()
+            
+        except Exception as e:
+            print(f"Error showing card: {str(e)}")
+            self.display_label.config(text="Error displaying card")
 
     def toggle_answer(self):
-        if not self.flashcards:
-            return
-
-        flashcard = self.flashcards[self.current_index]
-        if self.answer_showing:
-            self.show_flashcard()  # This will show the question
-        else:
-            card_count = f"Card {self.current_index + 1} of {len(self.flashcards)}"
-            self.display_label.config(
-                text=f"{card_count}\n\nA: {flashcard['answer']}"
-            )
         self.answer_showing = not self.answer_showing
+        self.show_current_card()
+        if self.answer_showing:
+            self.answer_frame.pack(pady=10)  # Show correct/wrong buttons
+        else:
+            self.answer_frame.pack_forget()  # Hide correct/wrong buttons
 
     def mark_correct(self):
-        if not self.flashcards:
+        if not self.answer_showing:
             return
         self.correct_count += 1
         self.total_attempted += 1
-        self.update_stats()
-        self.next_flashcard()
-        self.update_progress()
+        self.next_card()
 
     def mark_wrong(self):
-        if not self.flashcards:
+        if not self.answer_showing:
             return
         self.total_attempted += 1
-        self.update_stats()
-        self.next_flashcard()
-        self.update_progress()
+        self.next_card()
 
-    def update_stats(self):
-        percentage = (self.correct_count / max(1, self.total_attempted)) * 100
-        self.stats_label.config(text=f"Correct: {self.correct_count}/{self.total_attempted} ({percentage:.1f}%)")
+    def next_card(self):
+        self.current_card_index += 1  # Just increment, don't cycle
+        self.answer_showing = False
+        self.answer_frame.pack_forget()
+        
+        # Check if we've completed all cards
+        if self.current_card_index >= len(self.flashcards):
+            self.show_completion_screen()
+        else:
+            self.show_current_card()
 
     def show_completion_screen(self):
-        # Hide study controls
-        self.display_label.pack_forget()
+        # Clear the main UI elements
+        self.progress_frame.pack_forget()
+        self.card_frame.pack_forget()
         self.button_frame.pack_forget()
-        self.study_frame.pack_forget()
-        self.stats_label.pack_forget()
-
-        # Show completion frame
-        self.completion_frame.pack(expand=True, fill='both', padx=20, pady=20)
-
-        # Calculate final stats
-        percentage = (self.correct_count / max(1, self.total_attempted)) * 100
-        grade = self.calculate_grade(percentage)
-
-        completion_text = (
-            f"🎉 Study Session Complete! 🎉\n\n"
-            f"Cards Studied: {self.total_attempted}\n"
-            f"Correct Answers: {self.correct_count}\n"
-            f"Success Rate: {percentage:.1f}%\n"
-            f"Grade: {grade}"
-        )
-
-        self.final_stats_label.config(text=completion_text)
-
-    def calculate_grade(self, percentage):
-        if percentage >= 90:
-            return "A 🌟"
-        elif percentage >= 80:
-            return "B ⭐"
-        elif percentage >= 70:
-            return "C ✨"
-        elif percentage >= 60:
-            return "D 💫"
+        
+        # Calculate accuracy
+        accuracy = (self.correct_count / self.total_attempted) * 100 if self.total_attempted > 0 else 0
+        
+        # Create completion frame
+        completion_frame = ttk.Frame(self.main_container, padding=20)
+        completion_frame.pack(expand=True, fill="both")
+        
+        # Determine grade and message
+        if accuracy >= 90:
+            grade = "🏆  OUTSTANDING !  🌟"
+            message = "You're absolutely crushing it! Keep up the amazing work!"
+            color = "#28a745"
+            grade_letter = "A+"
+        elif accuracy >= 80:
+            grade = "🎉  EXCELLENT !  🌟"
+            message = "Fantastic performance! Just a bit more to perfection!"
+            color = "#218838"
+            grade_letter = "A"
+        elif accuracy >= 70:
+            grade = "👍  GREAT WORK !  💫"
+            message = "You're doing really well! Keep practicing!"
+            color = "#17a2b8"
+            grade_letter = "B"
+        elif accuracy >= 60:
+            grade = "💪  GOOD EFFORT !  ✨"
+            message = "Nice progress! Keep pushing forward!"
+            color = "#ffc107"
+            grade_letter = "C"
         else:
-            return "F 📚"
+            grade = "📚  KEEP GOING !  💫"
+            message = "Every mistake is a learning opportunity! Don't give up!"
+            color = "#dc3545"
+            grade_letter = "D"
+
+        # Grade display
+        grade_label = ttk.Label(
+            completion_frame,
+            text=f"{grade_letter}",
+            font=("Arial", 72, "bold"),
+            foreground=color
+        )
+        grade_label.pack(pady=(0, 20))
+
+        # Results text
+        results_text = (
+            f"{grade}\n\n"
+            f"📊  Session Complete!\n\n"
+            f"📝  Cards Studied: {self.total_attempted}\n"
+            f"✅  Correct Answers: {self.correct_count}\n"
+            f"🎯  Accuracy: {accuracy:.1f}%\n\n"
+            f"{message}\n\n"
+            f"{'⭐ ' * (int(accuracy/20) + 1)}"
+        )
+        
+        results_label = ttk.Label(
+            completion_frame,
+            text=results_text,
+            font=("Arial", 14),
+            justify="center",
+            wraplength=600
+        )
+        results_label.pack(pady=20)
+        
+        # Buttons frame
+        button_frame = ttk.Frame(completion_frame)
+        button_frame.pack(pady=20)
+        
+        # Study Again button
+        ttk.Button(
+            button_frame,
+            text="🔄  Study Again",
+            command=self.restart_study,
+            width=20,
+            style="Action.TButton"
+        ).pack(side="left", padx=10)
+        
+        # Finish button
+        ttk.Button(
+            button_frame,
+            text="✅  Finish",
+            command=self.window.destroy,
+            width=20,
+            style="Action.TButton"
+        ).pack(side="left", padx=10)
 
     def restart_study(self):
-        # Reset all study progress
-        self.seen_cards.clear()
+        self.current_card_index = 0
         self.correct_count = 0
         self.total_attempted = 0
-        self.current_index = 0
         self.answer_showing = False
-
-        # Hide completion frame
-        self.completion_frame.pack_forget()
-
-        # Show study controls
-        self.display_label.pack(pady=20)
-        self.button_frame.pack(pady=10)
-        self.study_frame.pack(pady=10)
-        self.stats_label.pack(pady=5)
-
-        # Update stats and show first card
-        self.update_stats()
+        
+        # Reset display
+        self.display_frame.pack(expand=True, fill="both", pady=20)
+        self.button_frame.pack(fill="x", pady=10)
+        self.show_answer_btn.pack(pady=10)
+        
+        # Shuffle cards and start over
+        import random
+        random.shuffle(self.flashcards)
         self.show_flashcard()
-
-    def load_study_history(self):
-        history_file = "study_history.json"
-        if os.path.exists(history_file):
-            with open(history_file, "r") as file:
-                return json.load(file)
-        return {}
 
 
 class ClassSelectionWindow:
     def __init__(self, parent):
         self.window = tk.Toplevel(parent)
         self.window.title("Select Class to Study")
-        self.window.geometry("400x400")
-
+        self.window.geometry("600x700")  # Increased class selection window size
+        
         # Title
-        self.title_label = tk.Label(
+        ttk.Label(
             self.window,
             text="Select a Class",
             font=("Arial", 24, "bold")
-        )
-        self.title_label.pack(pady=20)
-
+        ).pack(pady=20)
+        
         # Get available classes
         self.classes = self.get_available_classes()
-
+        
         # Create buttons for each class
         for class_name in sorted(self.classes):
-            btn = ttk.Button(
+            ttk.Button(
                 self.window,
                 text=class_name,
                 command=lambda c=class_name: self.start_study(c),
                 width=30
-            )
-            btn.pack(pady=5)
-
+            ).pack(pady=5)
+        
         # Add "All Classes" button
         ttk.Button(
             self.window,
@@ -446,15 +611,27 @@ class ClassSelectionWindow:
 
     def get_available_classes(self):
         classes = set()
-        if os.path.exists(FLASHCARD_FILE):
-            with open(FLASHCARD_FILE, "r") as file:
-                flashcards = json.load(file)
-                for card in flashcards:
-                    if "class_name" in card:
-                        classes.add(card["class_name"])
+        try:
+            print(f"Looking for flashcards file at: {os.path.abspath(FLASHCARD_FILE)}")
+            if os.path.exists(FLASHCARD_FILE):
+                with open(FLASHCARD_FILE, "r", encoding='utf-8') as file:
+                    flashcards = json.load(file)
+                    print(f"Found {len(flashcards)} cards in file")
+                    for card in flashcards:
+                        if "class_name" in card:
+                            class_name = card["class_name"]
+                            classes.add(class_name)
+                            print(f"Found class: {class_name}")
+        except Exception as e:
+            print(f"Error reading classes: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            
+        print(f"Available classes: {classes}")
         return classes
 
     def start_study(self, class_name):
+        print(f"Starting study for class: {class_name}")  # Debug print
         self.window.destroy()
         StudyWindow(self.window.master, class_name)
 
@@ -463,85 +640,84 @@ class FlashcardApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Flashcard App")
-        self.root.geometry("800x600")
-
-        # Load settings first
-        self.settings = Settings()
-        self.apply_theme()
-
-        # Rest of the init code...
-
-    def apply_theme(self):
-        self.style = ttk.Style()
-        if self.settings.settings["theme"] == "dark":
-            self.root.configure(bg="#2c2c2c")
-            self.style.configure("TFrame", background="#2c2c2c")
-            self.style.configure("TButton", background="#404040", foreground="white")
-            self.style.configure("TLabel", background="#2c2c2c", foreground="white")
-            self.style.configure("Treeview",
-                                 background="#404040",
-                                 fieldbackground="#404040",
-                                 foreground="white"
-                                 )
-        else:
-            self.root.configure(bg="white")
-            self.style.configure("TFrame", background="white")
-            self.style.configure("TButton", background="#f0f0f0", foreground="black")
-            self.style.configure("TLabel", background="white", foreground="black")
-            self.style.configure("Treeview",
-                                 background="white",
-                                 fieldbackground="white",
-                                 foreground="black"
-                                 )
-
-        # Apply font size
-        font_size = self.settings.settings["font_size"]
-        self.style.configure("TButton", font=("Arial", font_size))
-        self.style.configure("TLabel", font=("Arial", font_size))
-
-    def play_sound(self, sound_type):
-        if self.settings.settings["enable_sounds"]:
-            if sound_type == "correct":
-                # You can use system beep for now
-                self.root.bell()
-                # For better sounds, you'd need to install and use a sound library like pygame
-                # self.correct_sound.play()
-            elif sound_type == "wrong":
-                self.root.bell()
-                # self.wrong_sound.play()
-
+        self.root.geometry("800x600")  # Increased main window size
+        
+        # Initialize files
+        initialize_files()
+        
+        # Main container
+        main_frame = ttk.Frame(self.root, padding=20)
+        main_frame.pack(expand=True, fill="both")
+        
+        # Title with emoji
+        ttk.Label(
+            main_frame,
+            text="📚  Study Smart !  🎯",
+            font=("Arial", 24, "bold")
+        ).pack(pady=20)
+        
+        # Buttons
+        buttons = [
+            ("➕  Add Cards", self.open_add_cards),
+            ("📖  Study Now", self.open_study_window),
+            ("📝  Manage Cards", self.open_card_manager),
+            ("⚙️  Settings", self.open_settings)
+        ]
+        
+        for text, command in buttons:
+            ttk.Button(
+                main_frame,
+                text=text,
+                command=command,
+                width=30
+            ).pack(pady=10)
+    
     def open_add_cards(self):
         AddCardsWindow(self.root)
-
+    
+    def open_study_window(self):
+        # Open class selection window first
+        self.open_class_selection()
+    
     def open_class_selection(self):
-        ClassSelectionWindow(self.root)
-
-    def open_manager(self):
+        class_window = tk.Toplevel(self.root)
+        class_window.title("Select Class")
+        class_window.geometry("600x500")  # Increased class selection window size
+        
+        main_frame = ttk.Frame(class_window, padding=20)
+        main_frame.pack(expand=True, fill="both")
+        
+        ttk.Label(
+            main_frame,
+            text="📚  Select a Class  📚",
+            font=("Arial", 14, "bold")
+        ).pack(pady=20)
+        
+        # Get available classes
+        classes = set()
+        if os.path.exists(FLASHCARD_FILE):
+            with open(FLASHCARD_FILE, "r") as file:
+                flashcards = json.load(file)
+                for card in flashcards:
+                    if "class_name" in card:
+                        classes.add(card["class_name"])
+        
+        # Create buttons for each class
+        for class_name in sorted(classes):
+            ttk.Button(
+                main_frame,
+                text=f"📖  {class_name}",
+                command=lambda c=class_name: self.start_study_session(c, class_window),
+                width=30
+            ).pack(pady=5)
+    
+    def start_study_session(self, class_name, class_window):
+        class_window.destroy()
+        StudyWindow(self.root, class_name)
+    
+    def open_card_manager(self):
         CardManagerWindow(self.root)
-
-    def import_cards(self):
-        file_path = filedialog.askopenfilename(
-            filetypes=[
-                ("CSV files", "*.csv"),
-                ("JSON files", "*.json")
-            ]
-        )
-        if file_path:
-            # Import logic here
-            pass
-
-    def export_cards(self):
-        file_path = filedialog.asksaveasfilename(
-            defaultextension=".csv",
-            filetypes=[
-                ("CSV files", "*.csv"),
-                ("JSON files", "*.json")
-            ]
-        )
-        if file_path:
-            # Export logic here
-            pass
-
+    
     def open_settings(self):
         SettingsWindow(self.root)
 
@@ -621,10 +797,10 @@ class CardManagerWindow:
         self.button_frame = ttk.Frame(self.window)
         self.button_frame.pack(fill='x', padx=10, pady=10)
 
-        # Add control buttons with icons
+        # Add control buttons with better icons
         ttk.Button(
             self.button_frame,
-            text="����️ Delete Selected",
+            text="🗑️ Delete Selected",
             command=self.delete_selected
         ).pack(side='left', padx=5)
 
@@ -683,21 +859,22 @@ class CardManagerWindow:
         for item in self.tree.get_children():
             self.tree.delete(item)
 
-        # Load cards from file
-        if os.path.exists(FLASHCARD_FILE):
-            with open(FLASHCARD_FILE, "r") as file:
-                flashcards = json.load(file)
-                for i, card in enumerate(flashcards):
-                    self.tree.insert(
-                        '',
-                        'end',
-                        values=(
-                            card.get('class_name', ''),
-                            card.get('question', ''),
-                            card.get('answer', '')
-                        ),
-                        iid=str(i)
-                    )
+        # Load cards with error handling
+        flashcards = safe_json_load(FLASHCARD_FILE, [])
+        for i, card in enumerate(flashcards):
+            try:
+                self.tree.insert(
+                    '',
+                    'end',
+                    values=(
+                        card.get('class_name', ''),
+                        card.get('question', ''),
+                        card.get('answer', '')
+                    ),
+                    iid=str(i)
+                )
+            except Exception as e:
+                print(f"Error loading card {i}: {str(e)}")
 
     def search_cards(self):
         search_term = self.search_entry.get().lower()
@@ -709,18 +886,17 @@ class CardManagerWindow:
                 self.tree.selection_remove(item)
 
     def delete_selected(self):
-        selected = self.tree.selection()
-        if not selected:
-            messagebox.showinfo("Info", "Please select a card to delete")
+        if not self.tree.selection():
+            messagebox.showinfo("Info", "ℹ️  Please select a card to delete")
             return
 
-        if messagebox.askyesno("Confirm Delete", "Are you sure you want to delete the selected card(s)?"):
+        if messagebox.askyesno("Confirm Delete", "🗑️  Are you sure you want to delete the selected card(s) ?"):
             # Load current cards
             with open(FLASHCARD_FILE, "r") as file:
                 flashcards = json.load(file)
 
             # Get indices to delete
-            indices = [int(i) for i in selected]
+            indices = [int(i) for i in self.tree.selection()]
             # Remove cards in reverse order to maintain correct indices
             for index in sorted(indices, reverse=True):
                 flashcards.pop(index)
@@ -731,6 +907,7 @@ class CardManagerWindow:
 
             # Reload the display
             self.load_cards()
+            messagebox.showinfo("Success", "✅  Cards deleted successfully !")
 
     def edit_selected(self):
         selected = self.tree.selection()
@@ -813,104 +990,93 @@ class Card:
 class Settings:
     def __init__(self):
         self.settings = {
-            "theme": "light",
             "font_size": 12,
             "cards_per_session": 20,
-            "show_progress": True,
-            "enable_sounds": True
+            "show_progress": True
         }
         self.load_settings()
 
     def load_settings(self):
-        if os.path.exists("settings.json"):
-            with open("settings.json", "r") as f:
-                self.settings.update(json.load(f))
+        self.settings.update(safe_json_load("settings.json", {}))
+
+    def save_settings(self, new_settings):
+        try:
+            with open("settings.json", "w") as f:
+                json.dump(new_settings, f)
+            return True
+        except Exception as e:
+            print(f"Error saving settings: {str(e)}")
+            return False
 
 
 class SettingsWindow:
     def __init__(self, parent):
         self.window = tk.Toplevel(parent)
         self.window.title("Settings")
-        self.window.geometry("400x500")
-
-        # Create settings UI
-        ttk.Label(
-            self.window,
-            text="⚙️ Settings",
-            font=("Arial", 24, "bold")
-        ).pack(pady=20)
-
-        # Theme selection
-        ttk.Label(self.window, text="Theme:").pack(pady=5)
-        self.theme_var = tk.StringVar(value="light")
-        ttk.Radiobutton(self.window, text="Light", value="light", variable=self.theme_var).pack()
-        ttk.Radiobutton(self.window, text="Dark", value="dark", variable=self.theme_var).pack()
-
+        self.window.geometry("600x400")  # Increased settings window size
+        
+        main_frame = ttk.Frame(self.window, padding=20)
+        main_frame.pack(expand=True)
+        
         # Font size
-        ttk.Label(self.window, text="Font Size:").pack(pady=5)
-        self.font_scale = ttk.Scale(self.window, from_=10, to=20, orient="horizontal")
-        self.font_scale.set(12)  # Default font size
-        self.font_scale.pack(padx=20, pady=5)
-
+        ttk.Label(main_frame, text="Font Size:").pack()
+        self.font_scale = ttk.Scale(
+            main_frame, 
+            from_=10, 
+            to=20, 
+            orient="horizontal"
+        )
+        self.font_scale.set(12)
+        self.font_scale.pack(pady=(0, 20))
+        
         # Cards per session
-        ttk.Label(self.window, text="Cards per Study Session:").pack(pady=5)
-        self.cards_scale = ttk.Scale(self.window, from_=5, to=50, orient="horizontal")
-        self.cards_scale.set(20)  # Default number of cards
-        self.cards_scale.pack(padx=20, pady=5)
-
-        # Checkboxes for other options
+        ttk.Label(main_frame, text="Cards per Study Session:").pack()
+        self.cards_scale = ttk.Scale(
+            main_frame, 
+            from_=5, 
+            to=50, 
+            orient="horizontal"
+        )
+        self.cards_scale.set(20)
+        self.cards_scale.pack(pady=(0, 20))
+        
+        # Show progress option
         self.show_progress_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(
-            self.window,
+            main_frame,
             text="Show Progress Bar",
             variable=self.show_progress_var
-        ).pack(pady=5)
-
-        self.enable_sounds_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(
-            self.window,
-            text="Enable Sounds",
-            variable=self.enable_sounds_var
-        ).pack(pady=5)
-
+        ).pack(pady=10)
+        
         # Save button
         ttk.Button(
-            self.window,
-            text="Save Changes",
+            main_frame,
+            text="Save",
             command=self.save_settings
         ).pack(pady=20)
-
-        # Load existing settings
+        
         self.load_existing_settings()
+
+    def save_settings(self):
+        settings = {
+            "font_size": int(self.font_scale.get()),
+            "cards_per_session": int(self.cards_scale.get()),
+            "show_progress": self.show_progress_var.get()
+        }
+        
+        with open("settings.json", "w") as f:
+            json.dump(settings, f)
+            
+        messagebox.showinfo("Success", "Settings saved!")
+        self.window.destroy()
 
     def load_existing_settings(self):
         if os.path.exists("settings.json"):
             with open("settings.json", "r") as f:
                 settings = json.load(f)
-                self.theme_var.set(settings.get("theme", "light"))
                 self.font_scale.set(settings.get("font_size", 12))
                 self.cards_scale.set(settings.get("cards_per_session", 20))
                 self.show_progress_var.set(settings.get("show_progress", True))
-                self.enable_sounds_var.set(settings.get("enable_sounds", True))
-
-    def save_settings(self):
-        settings = {
-            "theme": self.theme_var.get(),
-            "font_size": int(self.font_scale.get()),  # Make sure it's an integer
-            "cards_per_session": int(self.cards_scale.get()),
-            "show_progress": self.show_progress_var.get(),
-            "enable_sounds": self.enable_sounds_var.get()
-        }
-
-        with open("settings.json", "w") as f:
-            json.dump(settings, f)
-
-        # Update parent app settings
-        self.window.master.settings.settings = settings
-        self.window.master.apply_theme()  # Apply new theme
-
-        messagebox.showinfo("Success", "Settings saved successfully!\nSome changes may require restart.")
-        self.window.destroy()
 
 
 # Main loop
