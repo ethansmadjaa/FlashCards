@@ -1,4 +1,13 @@
 import tkinter as tk
+import os
+import sys
+
+# Suppress macOS IMK messages
+if sys.platform == 'darwin':  # Check if running on macOS
+    # Redirect stderr to devnull
+    stderr = sys.stderr
+    devnull = open(os.devnull, 'w')
+    sys.stderr = devnull
 
 from src.utils import initialize_files
 from src.windows import FlashcardApp
