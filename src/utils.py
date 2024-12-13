@@ -1,10 +1,11 @@
 import json
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 # Constants
 FLASHCARD_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "flashcards.json")
 SETTINGS_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "settings.json")
+STATS_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "study_stats.json")
 
 
 def safe_json_load(file_path: str, default_value: Any) -> Any:
@@ -41,6 +42,9 @@ def initialize_files() -> None:
         }
         save_json(SETTINGS_FILE, default_settings)
 
+    if not os.path.exists(STATS_FILE):
+        save_json(STATS_FILE, {})
+
 
 def get_available_classes() -> set:
     """Get all available class names from flashcards"""
@@ -55,9 +59,33 @@ def get_available_classes() -> set:
     return classes
 
 
-def load_cards_for_class(class_name: str = None) -> List[Dict]:
+def load_cards_for_class(class_name: Optional[str] = None) -> List[Dict]:
     """Load cards for a specific class or all cards if class_name is None"""
-    all_cards = safe_json_load(FLASHCARD_FILE, [])
-    if class_name is None:
-        return all_cards
-    return [card for card in all_cards if card['class_name'].lower() == class_name.lower()]
+    try:
+        print(f"DEBUG: Loading cards from {FLASHCARD_FILE}")  # Debug print
+        print(f"DEBUG: Looking for class: {class_name}")  # Debug print
+        
+        if not os.path.exists(FLASHCARD_FILE):
+            print("DEBUG: Flashcard file does not exist")  # Debug print
+            return []
+            
+        cards = safe_json_load(FLASHCARD_FILE, [])
+        print(f"DEBUG: Loaded {len(cards)} total cards")  # Debug print
+        
+        if not cards:
+            print("DEBUG: No cards found in file")  # Debug print
+            return []
+            
+        if class_name is None:
+            print("DEBUG: Returning all cards")  # Debug print
+            return cards
+            
+        filtered_cards = [card for card in cards if card.get('class_name') == class_name]
+        print(f"DEBUG: Found {len(filtered_cards)} cards for class {class_name}")  # Debug print
+        if filtered_cards:
+            print(f"DEBUG: First filtered card: {filtered_cards[0]}")  # Debug print
+        return filtered_cards
+        
+    except Exception as e:
+        print(f"DEBUG: Error loading cards: {e}")  # Debug print
+        return []
