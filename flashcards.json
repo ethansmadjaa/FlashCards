@@ -1324,5 +1324,309 @@
     "answer": "The structure is: `LOOP FETCH cursor INTO variables; IF condition THEN LEAVE loop_name; END IF; END LOOP;`.",
     "class_name": "Advanced databases",
     "difficulty": "medium"
+  },
+  {
+    "question": "What is data visualization?",
+    "answer": "Data visualization is the graphical representation of information and data to identify trends, patterns, and insights.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What Python libraries are commonly used for data visualization?",
+    "answer": "Common Python libraries for data visualization include Pandas, NumPy, and Matplotlib.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you create a simple line plot using Matplotlib?",
+    "answer": "Use the following code snippet: `import matplotlib.pyplot as plt; plt.plot([1, 2, 3, 4], [10, 20, 25, 30]); plt.show()`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is Streamlit used for?",
+    "answer": "Streamlit is a Python framework used to create interactive web applications for data visualization.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you load a dataset using Pandas?",
+    "answer": "Use the code: `import pandas as pd; df = pd.read_csv('filename.csv')`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the following code do: `df.plot(kind='bar')`?",
+    "answer": "This code generates a bar chart from a Pandas DataFrame.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the purpose of NumPy in data visualization?",
+    "answer": "NumPy is used for numerical operations and data manipulation, which can be essential for preparing data before visualization.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the key steps in the data visualization workflow?",
+    "answer": "The key steps are data collection, data cleaning, data analysis, and data visualization.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the following code do in Streamlit: `st.line_chart(data)`?",
+    "answer": "This code generates an interactive line chart using the provided data in a Streamlit application.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you display a histogram in Matplotlib?",
+    "answer": "Use the code: `plt.hist(data); plt.show()`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What function is used in Matplotlib to add a title to a plot?",
+    "answer": "Use `plt.title('Your Title Here')` to add a title to a plot.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you create a scatter plot using Matplotlib?",
+    "answer": "Use the code: `plt.scatter(x, y); plt.show()`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the benefit of creating interactive dashboards with Streamlit?",
+    "answer": "Interactive dashboards allow users to explore data dynamically, making it easier to gain insights.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the following code do: `df.describe()`?",
+    "answer": "It generates summary statistics for the numerical columns in a Pandas DataFrame.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the purpose of the `plt.xlabel()` and `plt.ylabel()` functions in Matplotlib?",
+    "answer": "These functions add labels to the x-axis and y-axis of a plot, respectively.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the three key disciplines combined in data science?",
+    "answer": "The three key disciplines are Math & Statistics, Computer Science, and Business Domain Expertise.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the CRISP-DM process in data science?",
+    "answer": "CRISP-DM stands for Cross Industry Standard Process for Data Mining and includes six phases: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What are the main tasks of a data scientist?",
+    "answer": "A data scientist collects, cleans, transforms, and analyzes data to extract meaningful insights and make data-driven decisions.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What does the term 'data preparation' refer to?",
+    "answer": "Data preparation involves collecting, cleaning, transforming, and scaling data to make it suitable for analysis and modeling.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What are the six phases of the CRISP-DM process?",
+    "answer": "The six phases are Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the purpose of the 'Data Understanding' phase in CRISP-DM?",
+    "answer": "The Data Understanding phase involves exploring the data to determine what data is available and whether it is suitable for analysis.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is an example of a data cleaning task?",
+    "answer": "Removing missing values, correcting inconsistent data, and eliminating duplicate entries are examples of data cleaning tasks.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the difference between classification and regression in machine learning?",
+    "answer": "Classification predicts categorical outcomes (e.g., Yes/No), while regression predicts continuous values (e.g., sales or temperature).",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is a key goal of the 'Business Understanding' phase in CRISP-DM?",
+    "answer": "The goal is to identify business objectives and determine the project's success criteria.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "How is feature scaling performed during data preparation?",
+    "answer": "Feature scaling involves techniques like Min-Max scaling or standardization to bring all numerical variables to a similar scale.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the purpose of the 'Deployment' phase in CRISP-DM?",
+    "answer": "The Deployment phase involves implementing the model in a real-world environment and maintaining it.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the role of data visualization in data analysis?",
+    "answer": "Data visualization helps in understanding data patterns, trends, and insights by presenting data graphically.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What does 'data transformation' involve?",
+    "answer": "Data transformation involves converting data into a suitable format, such as normalization, aggregation, or decomposition.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is the significance of data augmentation?",
+    "answer": "Data augmentation increases the size of the dataset by creating modified copies of existing data, improving model performance.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "How do you handle missing values in a dataset?",
+    "answer": "Missing values can be handled by imputation (replacing with mean/median) or by removing incomplete records.",
+    "class_name": "data analysis"
+  },
+  {
+    "question": "What is data visualization?",
+    "answer": "Data visualization is the process of transforming data into visual representations to help users understand and analyze the data.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "Who is credited with early data visualization techniques in the 15th century?",
+    "answer": "Leonardo da Vinci is credited with early data visualization techniques through his anatomical drawings.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the three main goals of data visualization?",
+    "answer": "The three goals are to explore data, analyze data to verify or falsify hypotheses, and present data to communicate results.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the key stages of a data visualization pipeline?",
+    "answer": "The stages are data acquisition, data enhancement, visualization mapping, and rendering.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How is a bar chart used in data visualization?",
+    "answer": "A bar chart represents categorical data with rectangular bars proportional to the values they represent.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the main purpose of a pie chart?",
+    "answer": "A pie chart shows the relative proportions of categories in a dataset as slices of a circle.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the difference between SciVis and InfoVis?",
+    "answer": "SciVis focuses on spatial and physical data (2-4 dimensions), while InfoVis deals with abstract, high-dimensional data.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do scatter plots help in data visualization?",
+    "answer": "Scatter plots show the relationship between two continuous variables using points on a Cartesian plane.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the typical components of a line chart?",
+    "answer": "A line chart includes data points connected by lines to show trends over time or continuous intervals.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What type of data is best represented by a histogram?",
+    "answer": "Histograms are used to represent the distribution of numerical data by grouping it into intervals or bins.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the main advantage of using dashboards in data visualization?",
+    "answer": "Dashboards combine multiple visualizations in one interface to facilitate data analysis and presentation.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is a geospatial visualization?",
+    "answer": "A geospatial visualization displays data on maps, using shapes and colors to represent relationships and locations.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are the characteristics of a good infographic?",
+    "answer": "A good infographic combines visuals and text to convey data effectively and is easy to understand.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the term 'visualization mapping' refer to?",
+    "answer": "Visualization mapping is the process of matching data with visual primitives like colors, shapes, and geometry.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the key difference between charts and graphs?",
+    "answer": "Charts present data in various formats, while graphs specifically use points, lines, and axes to show relationships.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is Matplotlib, and who created it?",
+    "answer": "Matplotlib is a Python library for creating static, animated, and interactive plots. It was created by John D. Hunter.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you install Matplotlib using pip?",
+    "answer": "Run the command `pip install matplotlib` in the terminal.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you import the Pyplot module in Matplotlib?",
+    "answer": "Use `import matplotlib.pyplot as plt`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the following code do: `plt.plot([0, 6], [0, 250])`?",
+    "answer": "It creates a line plot from the point (0, 0) to the point (6, 250).",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What function is used to create a scatter plot in Matplotlib?",
+    "answer": "Use the `scatter()` function, e.g., `plt.scatter(x, y)`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you create a bar chart using Matplotlib?",
+    "answer": "Use the `bar()` function, e.g., `plt.bar(x, y)`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the purpose of the `hist()` function in Matplotlib?",
+    "answer": "The `hist()` function is used to create histograms that represent the frequency distribution of a dataset.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you create a pie chart using Matplotlib?",
+    "answer": "Use the `pie()` function, e.g., `plt.pie(y)`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is a Matplotlib figure?",
+    "answer": "A figure is the entire window or page on which plots can be drawn. It can contain multiple axes.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What are axes in Matplotlib?",
+    "answer": "Axes are the regions within a figure where data is plotted, including x and y axes.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is the purpose of the `title()` function in Matplotlib?",
+    "answer": "The `title()` function adds a title to the plot, e.g., `plt.title('My Plot')`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you add a legend to a plot in Matplotlib?",
+    "answer": "Use the `legend()` function, e.g., `plt.legend(['label1', 'label2'])`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "How do you add grid lines to a plot?",
+    "answer": "Use the `grid()` function, e.g., `plt.grid(True)`.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What does the `annotate()` function do in Matplotlib?",
+    "answer": "The `annotate()` function adds annotations to a plot, often with arrows pointing to specific data points.",
+    "class_name": "data visualization"
+  },
+  {
+    "question": "What is a colormap in Matplotlib?",
+    "answer": "A colormap is a range of colors used to represent data values in visualizations, e.g., the 'viridis' colormap.",
+    "class_name": "data visualization"
   }
 ]
+
+
+
+
