@@ -6,5 +6,21 @@
             "correct": 39,
             "accuracy": 100.0
         }
+    ],
+    "Advanced databases": [
+        {
+            "timestamp": "2024-12-14T14:51:36.963579",
+            "total_cards": 20,
+            "correct": 10,
+            "accuracy": 50.0
+        }
+    ],
+    "Machine Learning": [
+        {
+            "timestamp": "2024-12-14T16:06:37.657669",
+            "total_cards": 20,
+            "correct": 13,
+            "accuracy": 65.0
+        }
     ]
 }
