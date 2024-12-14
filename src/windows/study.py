@@ -1,11 +1,12 @@
 from tkinter import ttk
 from typing import Optional
 import random  # Make sure this is imported at the top
+import tkinter.messagebox as messagebox
 
 from .base import BaseWindow
 from ..config import STUDY_WINDOW_SIZE, CLASS_SELECTION_SIZE, ENABLE_ANIMATIONS, \
-    ANIMATION_DURATION
-from ..models import StudyStats
+    ANIMATION_DURATION, DEFAULT_CARDS_PER_SESSION
+from ..models import StudyStats, Settings
 from ..utils import load_cards_for_class, get_available_classes
 
 
@@ -27,6 +28,10 @@ class StudyWindow(BaseWindow):
     def __init__(self, parent, class_name: str = None):
         super().__init__(parent, f"Study: {class_name or 'All Classes'}", STUDY_WINDOW_SIZE)
 
+        # Get settings
+        settings = Settings()
+        cards_per_session = settings.get('cards_per_session', DEFAULT_CARDS_PER_SESSION)
+
         # Basic attributes
         self.wrong_btn = None
         self.correct_btn = None
@@ -37,13 +42,17 @@ class StudyWindow(BaseWindow):
         self.card_frame = None
         self.progress_label = None
         self.class_name = class_name
-        self.cards = load_cards_for_class(class_name)
         
-        # Shuffle cards at initialization
-        if self.cards:
-            random.shuffle(self.cards)
-            print(f"DEBUG: Shuffled {len(self.cards)} cards")  # Debug print
-        
+        # Load and shuffle all cards
+        all_cards = load_cards_for_class(class_name)
+        if all_cards:
+            random.shuffle(all_cards)
+            # Take only the number of cards specified in settings
+            self.cards = all_cards[:cards_per_session]
+            print(f"DEBUG: Selected {len(self.cards)} cards from {len(all_cards)} available")
+        else:
+            self.cards = []
+
         self.current_index = 0
         self.correct_count = 0
         self.total_attempted = 0
@@ -66,6 +75,17 @@ class StudyWindow(BaseWindow):
     def setup_ui(self):
         """Set up the main UI components"""
         main_frame = self.create_main_frame()
+
+        # Add quit button at the top right
+        quit_frame = ttk.Frame(main_frame)
+        quit_frame.pack(fill="x", pady=(0, 10))
+        ttk.Button(
+            quit_frame,
+            text="❌ Quit Study",
+            command=self.quit_study,
+            style="Action.TButton",
+            width=15
+        ).pack(side="right", padx=10)
 
         # Title showing current class
         ttk.Label(
@@ -157,7 +177,7 @@ class StudyWindow(BaseWindow):
             self.card_frame.configure(text="❓ Question & 💡 Answer")
             content = (
                 f"{progress}\n\n"
-                f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"━━━━━━━━━━━━━━━━━━━��━━\n\n"
                 f"Question:\n{card['question']}\n\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
                 f"Answer:\n{card['answer']}"
@@ -453,6 +473,33 @@ class StudyWindow(BaseWindow):
                 '<Leave>',
                 lambda e, b=button, s=style: on_leave(b, s)
             )
+
+    def quit_study(self):
+        """Quit study session and save progress"""
+        if self.total_attempted > 0:  # Only save if some cards were attempted
+            # Calculate accuracy for attempted cards only
+            accuracy = (self.correct_count / self.total_attempted * 100)
+            
+            # Save session stats for attempted cards only
+            stats = StudyStats()
+            stats.add_session(
+                self.class_name or "all_classes",
+                self.total_attempted,  # Only count attempted cards
+                self.correct_count
+            )
+
+            message = (
+                f"Study Session Results:\n\n"
+                f"📝 Cards Studied: {self.total_attempted}/{len(self.cards)}\n"
+                f"✅ Correct Answers: {self.correct_count}\n"
+                f"🎯 Accuracy: {accuracy:.1f}%"
+            )
+        else:
+            message = "No cards were studied in this session."
+
+        if messagebox.askokcancel("Quit Study Session", message + "\n\nAre you sure you want to quit?"):
+            # Return to main menu
+            self.return_to_main()
 
 
 class ClassSelectionWindow(BaseWindow):
