@@ -2,13 +2,15 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from .base import BaseWindow
-from ..config import SETTINGS_WINDOW_SIZE, DEFAULT_FONT_SIZE, DEFAULT_CARDS_PER_SESSION, DEFAULT_SHOW_PROGRESS, ENABLE_SOUNDS
+from ..config import SETTINGS_WINDOW_SIZE, DEFAULT_FONT_SIZE, DEFAULT_CARDS_PER_SESSION
+from ..config import DEFAULT_SHOW_PROGRESS, ENABLE_SOUNDS
 from ..models import Settings, save_settings
 
 
 class SettingsWindow(BaseWindow):
     def __init__(self, parent):
         super().__init__(parent, "Settings", SETTINGS_WINDOW_SIZE)
+        self.enable_sounds_var = None
         self.preview_label = None
         self.show_progress_var = tk.BooleanVar(value=DEFAULT_SHOW_PROGRESS)
         self.cards_label = None
