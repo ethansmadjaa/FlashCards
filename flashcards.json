@@ -193,5 +193,309 @@
     "question": "What is grid search in hyperparameter tuning?",
     "answer": "Grid search exhaustively tests combinations of hyperparameters to find the best-performing configuration.",
     "class_name": "machine learning"
+  },
+  {
+    "question": "What is Big Data in the context of traditional computer science?",
+    "answer": "Big Data refers to data that will not fit in main memory.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the 3Vs of Big Data?",
+    "answer": "The 3Vs of Big Data are Volume, Variety, and Velocity.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does 'Volume' refer to in Big Data characteristics?",
+    "answer": "Volume refers to the scale of data, which grows exponentially each year.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does 'Variety' refer to in Big Data?",
+    "answer": "Variety refers to different types of data, such as structured, semi-structured, and unstructured data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is meant by 'Velocity' in Big Data?",
+    "answer": "Velocity refers to the speed at which data is generated and processed.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the goal of Big Data analytics?",
+    "answer": "The goal is to generalize or summarize the data to create useful insights.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the two types of analytics discussed in the lecture?",
+    "answer": "Descriptive analytics and predictive analytics.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the difference between descriptive and predictive analytics?",
+    "answer": "Descriptive analytics describes the data itself, while predictive analytics creates something generalizable to new data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is Hadoop's role in Big Data processing?",
+    "answer": "Hadoop provides distributed storage (HDFS) and a computation model (MapReduce) for processing large datasets.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the Spark framework used for?",
+    "answer": "Spark is used for large-scale data processing, offering faster computation than MapReduce and supporting machine learning libraries like MLlib.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is HDFS?",
+    "answer": "HDFS stands for Hadoop Distributed File System, used for storing large datasets across multiple nodes.",
+    "class_name": "big data"
+  },
+  {
+    "question": "How does traditional analytics differ from Big Data analytics?",
+    "answer": "Traditional analytics handles smaller datasets using sampling, while Big Data analytics processes entire datasets in real-time.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does 'Veracity' refer to in Big Data?",
+    "answer": "Veracity refers to the quality and trustworthiness of the data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "Why is visualization important in Big Data?",
+    "answer": "Visualization helps interpret and communicate insights from large datasets effectively.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does the term 'Value' signify in the context of Big Data?",
+    "answer": "Value signifies the meaningful insights and business benefits derived from Big Data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the purpose of the MapReduce programming model?",
+    "answer": "MapReduce is used for processing large datasets in a distributed and parallel manner.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the two main functions in MapReduce?",
+    "answer": "The two main functions are Map and Reduce.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does the Map function do in MapReduce?",
+    "answer": "The Map function processes input data and produces key-value pairs.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the role of the Reduce function in MapReduce?",
+    "answer": "The Reduce function aggregates or summarizes the intermediate key-value pairs produced by the Map function.",
+    "class_name": "big data"
+  },
+  {
+    "question": "Why is MapReduce suitable for Big Data processing?",
+    "answer": "MapReduce is suitable because it distributes data processing across multiple nodes, allowing for scalability and fault tolerance.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does 'bringing computation to the data' mean in MapReduce?",
+    "answer": "It means performing computation where the data is stored to avoid the cost of moving large amounts of data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the main challenges in IO cluster computing?",
+    "answer": "Node failure, network bottlenecks, and the complexity of traditional distributed programming.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is a Distributed File System (DFS) in the context of MapReduce?",
+    "answer": "A DFS stores data across multiple nodes and ensures data availability and fault tolerance.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is an example of a Distributed File System used with MapReduce?",
+    "answer": "HDFS (Hadoop Distributed File System).",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the shuffle step in MapReduce?",
+    "answer": "The shuffle step sorts and groups intermediate key-value pairs by key before passing them to the Reduce function.",
+    "class_name": "big data"
+  },
+  {
+    "question": "How does MapReduce handle node failures?",
+    "answer": "MapReduce handles node failures by replicating data and reassigning tasks to other nodes.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the significance of the word count example in MapReduce?",
+    "answer": "It demonstrates how to use the Map and Reduce functions to count the frequency of words in a large document.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is a key-value pair in the context of MapReduce?",
+    "answer": "A key-value pair is a data structure where the key represents a unique identifier, and the value holds associated data.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What type of tasks are most suitable for MapReduce?",
+    "answer": "Tasks involving large-scale data processing, such as data aggregation, sorting, and filtering.",
+    "class_name": "big data"
+  },
+  {
+    "question": "Why is network throughput a challenge in distributed computing?",
+    "answer": "Because transferring large datasets between nodes can become a bottleneck, slowing down computation.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the purpose of the MapReduce framework?",
+    "answer": "MapReduce is a programming model for processing large datasets in a distributed and parallel manner.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the three main phases of the MapReduce workflow?",
+    "answer": "The three main phases are Map, Shuffle and Sort, and Reduce.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the role of the Map function in MapReduce?",
+    "answer": "The Map function processes input data and produces intermediate key-value pairs.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What does the Reduce function do in MapReduce?",
+    "answer": "The Reduce function aggregates or processes the intermediate key-value pairs produced by the Map function.",
+    "class_name": "big data"
+  },
+  {
+    "question": "How does Hadoop achieve fault tolerance?",
+    "answer": "Hadoop achieves fault tolerance through data replication and re-execution of failed tasks.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is HDFS and why is it important for MapReduce?",
+    "answer": "HDFS (Hadoop Distributed File System) is a storage system that stores large datasets across multiple nodes and supports distributed processing.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the significance of data locality in MapReduce?",
+    "answer": "Data locality ensures computation is performed on the node where the data resides to minimize data transfer.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the purpose of the Shuffle and Sort phase in MapReduce?",
+    "answer": "Shuffle and Sort organizes the intermediate key-value pairs by key before passing them to the Reduce function.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is YARN in the Hadoop ecosystem?",
+    "answer": "YARN is a resource management framework that allows multiple applications to run on a Hadoop cluster.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are some advantages of using MapReduce?",
+    "answer": "Advantages include simplicity, scalability to large clusters, and automatic fault tolerance.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the function of the NameNode in HDFS?",
+    "answer": "The NameNode manages the file system metadata and keeps track of where data blocks are stored.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the role of DataNodes in HDFS?",
+    "answer": "DataNodes store the actual data blocks and serve read and write requests from clients.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the default replication factor in HDFS?",
+    "answer": "The default replication factor in HDFS is 3.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What type of tasks is MapReduce suitable for?",
+    "answer": "MapReduce is suitable for tasks like data aggregation, sorting, and distributed data processing.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is an example of a simple MapReduce program?",
+    "answer": "A word count program, which counts the occurrences of each word in a large dataset.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is Apache Spark designed for?",
+    "answer": "Apache Spark is designed for large-scale data processing with a focus on speed and in-memory computation.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are Resilient Distributed Datasets (RDDs)?",
+    "answer": "RDDs are distributed collections of data that are fault-tolerant and can be processed in parallel.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are the main languages supported by Spark's Core API?",
+    "answer": "Java, Scala, and Python.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the primary advantage of Spark over Hadoop MapReduce?",
+    "answer": "Spark performs in-memory computations, making it much faster for iterative tasks compared to Hadoop MapReduce.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the role of the SparkContext in a Spark application?",
+    "answer": "The SparkContext acts as the entry point to a Spark application and is used to build RDDs.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is a transformation in Spark?",
+    "answer": "A transformation is an operation that creates a new RDD from an existing RDD.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is an action in Spark?",
+    "answer": "An action triggers the execution of transformations and returns a result or writes data to storage.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is lazy evaluation in Spark?",
+    "answer": "Lazy evaluation means that transformations are not executed until an action is called.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are accumulators used for in Spark?",
+    "answer": "Accumulators are used for aggregating values across tasks in a distributed manner.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What are broadcast variables in Spark?",
+    "answer": "Broadcast variables allow large read-only data to be efficiently distributed to all worker nodes.",
+    "class_name": "big data"
+  },
+  {
+    "question": "How does Spark handle fault tolerance?",
+    "answer": "Spark handles fault tolerance by using RDD lineage to recompute lost data partitions.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the function of an executor in Spark?",
+    "answer": "An executor runs tasks and stores data for a Spark application.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the role of the cluster manager in Spark?",
+    "answer": "The cluster manager allocates resources to Spark applications.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the purpose of the `map()` transformation in Spark?",
+    "answer": "The `map()` transformation applies a function to each element in the RDD and returns a new RDD.",
+    "class_name": "big data"
+  },
+  {
+    "question": "What is the difference between narrow and wide dependencies in Spark?",
+    "answer": "Narrow dependencies have one-to-one relationships between partitions, while wide dependencies involve shuffling data between partitions.",
+    "class_name": "big data"
   }
 ]
+
+
+
+  
