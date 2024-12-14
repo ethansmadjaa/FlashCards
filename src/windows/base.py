@@ -7,28 +7,28 @@ from ..config import STYLES
 def setup_styles() -> None:
     """Initialize ttk styles"""
     style = ttk.Style()
-    
+
     # Set the global theme to light
-    style.configure(".", 
-        background="#ffffff",     # White background
-        foreground="#2c3e50",    # Dark text
-        fieldbackground="#ffffff" # White background for fields
-    )
-    
+    style.configure(".",
+                    background="#ffffff",  # White background
+                    foreground="#2c3e50",  # Dark text
+                    fieldbackground="#ffffff"  # White background for fields
+                    )
+
     # Configure all the specific styles
     for name, config in STYLES.items():
         style.configure(name, **config)
 
     # Configure Treeview colors
     style.configure("Treeview",
-        background="#ffffff",
-        foreground="#2c3e50",
-        fieldbackground="#ffffff"
-    )
+                    background="#ffffff",
+                    foreground="#2c3e50",
+                    fieldbackground="#ffffff"
+                    )
     style.configure("Treeview.Heading",
-        background="#f8f9fa",
-        foreground="#2c3e50"
-    )
+                    background="#f8f9fa",
+                    foreground="#2c3e50"
+                    )
 
 
 class BaseWindow:
