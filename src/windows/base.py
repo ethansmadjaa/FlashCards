@@ -47,16 +47,6 @@ class BaseWindow:
         setup_styles()
         self.center_window()  # Center window on creation
 
-        # Add status bar
-        self.status_bar = ttk.Label(
-            self.window,
-            text="Ready",
-            relief=tk.SUNKEN,
-            anchor=tk.W,
-            padding=(5, 2)
-        )
-        self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
-
     def create_main_frame(self, padding: int = 20) -> ttk.Frame:
         """Create and return a main container frame"""
         frame = ttk.Frame(self.window, padding=padding)
@@ -73,8 +63,3 @@ class BaseWindow:
         x = (screen_width - width) // 2
         y = (screen_height - height) // 2
         self.window.geometry(f'{width}x{height}+{x}+{y}')
-
-    def set_status(self, message: str, duration: int = 3000) -> None:
-        """Update status bar with message and clear after duration"""
-        self.status_bar.config(text=message)
-        self.window.after(duration, lambda: self.status_bar.config(text="Ready"))
