@@ -1,12 +1,12 @@
-import random
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from typing import Optional
-import pygame.mixer
+import random  # Make sure this is imported at the top
 
 from .base import BaseWindow
-from ..config import STUDY_WINDOW_SIZE, CLASS_SELECTION_SIZE, ENABLE_SOUNDS, SOUND_EFFECTS, ENABLE_ANIMATIONS, ANIMATION_DURATION
-from ..utils import load_cards_for_class, get_available_classes
+from ..config import STUDY_WINDOW_SIZE, CLASS_SELECTION_SIZE, ENABLE_ANIMATIONS, \
+    ANIMATION_DURATION
 from ..models import StudyStats
+from ..utils import load_cards_for_class, get_available_classes
 
 
 def get_grade_info(accuracy):
@@ -26,24 +26,38 @@ def get_grade_info(accuracy):
 class StudyWindow(BaseWindow):
     def __init__(self, parent, class_name: str = None):
         super().__init__(parent, f"Study: {class_name or 'All Classes'}", STUDY_WINDOW_SIZE)
-        
+
         # Basic attributes
+        self.wrong_btn = None
+        self.correct_btn = None
+        self.answer_frame = None
+        self.show_answer_btn = None
+        self.button_frame = None
+        self.content_label = None
+        self.card_frame = None
+        self.progress_label = None
         self.class_name = class_name
         self.cards = load_cards_for_class(class_name)
+        
+        # Shuffle cards at initialization
+        if self.cards:
+            random.shuffle(self.cards)
+            print(f"DEBUG: Shuffled {len(self.cards)} cards")  # Debug print
+        
         self.current_index = 0
         self.correct_count = 0
         self.total_attempted = 0
         self.answer_showing = False
-        
+
         # Check if we have cards
         if not self.cards:
             self.show_no_cards_message()
             return
-            
+
         # Initialize UI
         self.setup_ui()
         self.show_current_card()
-        
+
         # Bind shortcuts
         self.window.bind('<space>', lambda e: self.toggle_answer())
         self.window.bind('<Up>', lambda e: self.mark_correct())
@@ -52,7 +66,7 @@ class StudyWindow(BaseWindow):
     def setup_ui(self):
         """Set up the main UI components"""
         main_frame = self.create_main_frame()
-        
+
         # Title showing current class
         ttk.Label(
             main_frame,
@@ -60,7 +74,7 @@ class StudyWindow(BaseWindow):
             font=("Arial", 20, "bold"),
             foreground="#2c3e50"
         ).pack(pady=20)
-        
+
         # Progress label
         self.progress_label = ttk.Label(
             main_frame,
@@ -69,16 +83,16 @@ class StudyWindow(BaseWindow):
             foreground="#34495e"
         )
         self.progress_label.pack(pady=10)
-        
+
         # Card display
         self.card_frame = ttk.LabelFrame(
             main_frame,
-            text="❓ Question",
+            text="��� Question",
             padding=30,
             style="Card.TLabelframe"
         )
         self.card_frame.pack(fill="both", expand=True, padx=40, pady=20)
-        
+
         # Question/Answer text
         self.content_label = ttk.Label(
             self.card_frame,
@@ -90,11 +104,11 @@ class StudyWindow(BaseWindow):
             style="Content.TLabel"
         )
         self.content_label.pack(fill="both", expand=True, padx=30, pady=30)
-        
+
         # Buttons frame
         self.button_frame = ttk.Frame(main_frame)  # Store reference
         self.button_frame.pack(pady=30)
-        
+
         # Show/Hide answer button
         self.show_answer_btn = ttk.Button(
             self.button_frame,  # Use self.button_frame
@@ -104,10 +118,10 @@ class StudyWindow(BaseWindow):
             width=30
         )
         self.show_answer_btn.pack(pady=15)
-        
+
         # Answer buttons frame (initially hidden)
         self.answer_frame = ttk.Frame(self.button_frame)
-        
+
         # Correct/Wrong buttons
         self.correct_btn = ttk.Button(
             self.answer_frame,
@@ -135,10 +149,10 @@ class StudyWindow(BaseWindow):
         if self.current_index >= len(self.cards):
             self.show_completion_screen()
             return
-            
+
         card = self.cards[self.current_index]
         progress = f"📝 Card {self.current_index + 1} of {len(self.cards)}"
-        
+
         if self.answer_showing:
             self.card_frame.configure(text="❓ Question & 💡 Answer")
             content = (
@@ -159,9 +173,9 @@ class StudyWindow(BaseWindow):
             )
             self.show_answer_btn.configure(text="🔍 Show Answer (Space)")
             self.answer_frame.pack_forget()
-        
+
         self.content_label.configure(text=content)
-            
+
         # Update progress with emoji
         progress_pct = (self.total_attempted / len(self.cards)) * 100
         self.progress_label.configure(
@@ -177,7 +191,7 @@ class StudyWindow(BaseWindow):
 
         # Save current state
         current_width = self.card_frame.winfo_width()
-        
+
         # Animation steps
         steps = 15
         duration = ANIMATION_DURATION // steps
@@ -185,7 +199,7 @@ class StudyWindow(BaseWindow):
         def animate_flip(step):
             if step <= steps // 2:
                 # Shrinking animation
-                ratio = 1 - (step / (steps/2))
+                ratio = 1 - (step / (steps / 2))
                 new_width = int(current_width * ratio)
                 if new_width > 0:
                     self.card_frame.configure(width=new_width)
@@ -195,8 +209,8 @@ class StudyWindow(BaseWindow):
                     # Change content at the middle of animation
                     self.answer_showing = not self.answer_showing
                     self.show_current_card()
-                
-                ratio = (step - steps/2) / (steps/2)
+
+                ratio = (step - steps / 2) / (steps / 2)
                 new_width = int(current_width * ratio)
                 self.card_frame.configure(width=new_width)
 
@@ -216,14 +230,14 @@ class StudyWindow(BaseWindow):
             # Get the original position and packing info
             original_info = self.card_frame.pack_info()
             button_frame_info = self.button_frame.pack_info()  # Save button frame info too
-            
+
             # Switch to place geometry manager temporarily
             self.card_frame.pack_forget()
             self.button_frame.pack_forget()  # Unpack button frame
-            
+
             self.card_frame.place(
-                relx=0.5, 
-                rely=0.5, 
+                relx=0.5,
+                rely=0.5,
                 anchor="center",
                 width=self.card_frame.winfo_width(),
                 height=self.card_frame.winfo_height()
@@ -247,12 +261,12 @@ class StudyWindow(BaseWindow):
                     self.total_attempted += 1
                     self.current_index += 1
                     self.answer_showing = False
-                    
+
                     # Restore original packing
                     self.card_frame.place_forget()
                     self.card_frame.pack(**original_info)
                     self.button_frame.pack(**button_frame_info)  # Restore button frame
-                    
+
                     # Show next card
                     self.show_current_card()
 
@@ -261,7 +275,7 @@ class StudyWindow(BaseWindow):
             target_x = self.window.winfo_width()
             steps = 10
             dx = (target_x - current_x) // steps
-            
+
             animate_slide(1)
 
         if ENABLE_ANIMATIONS:
@@ -294,27 +308,27 @@ class StudyWindow(BaseWindow):
 
         # Get historical stats
         class_stats = stats.get_class_stats(self.class_name or "all_classes")
-        
+
         for widget in self.window.winfo_children():
             widget.destroy()
-        
+
         main_frame = self.create_main_frame()
-        
+
         # Current session results
         accuracy = (self.correct_count / self.total_attempted * 100) if self.total_attempted > 0 else 0
         grade, message, color = get_grade_info(accuracy)
-        
+
         ttk.Label(
             main_frame,
             text="🎉 Study Session Complete! 🎉",
             font=("Arial", 24, "bold"),
             foreground="#2c3e50"
         ).pack(pady=20)
-        
+
         # Current session frame
         session_frame = ttk.LabelFrame(main_frame, text="Current Session", padding=20)
         session_frame.pack(fill="x", padx=40, pady=10)
-        
+
         ttk.Label(
             session_frame,
             text=(
@@ -332,7 +346,7 @@ class StudyWindow(BaseWindow):
         # Historical stats frame
         stats_frame = ttk.LabelFrame(main_frame, text="Class Statistics", padding=20)
         stats_frame.pack(fill="x", padx=40, pady=10)
-        
+
         ttk.Label(
             stats_frame,
             text=(
@@ -343,11 +357,11 @@ class StudyWindow(BaseWindow):
             font=("Arial", 14),
             justify="center"
         ).pack()
-        
+
         # Action buttons
         button_frame = ttk.Frame(main_frame)
         button_frame.pack(pady=20)
-        
+
         ttk.Button(
             button_frame,
             text="🔄 Study Again",
@@ -355,7 +369,7 @@ class StudyWindow(BaseWindow):
             style="Action.TButton",
             width=20
         ).pack(side="left", padx=10)
-        
+
         ttk.Button(
             button_frame,
             text="🏠 Return to Main Menu",
@@ -368,15 +382,16 @@ class StudyWindow(BaseWindow):
         """Start a new study session with the same class"""
         for widget in self.window.winfo_children():
             widget.destroy()
+        # Create new study window (which will automatically shuffle cards)
         StudyWindow(self.window, self.class_name)
 
     def show_no_cards_message(self):
         """Show message when no cards are available"""
         for widget in self.window.winfo_children():
             widget.destroy()
-            
+
         main_frame = self.create_main_frame()
-        
+
         ttk.Label(
             main_frame,
             text=f"No flashcards found for {self.class_name or 'any class'}.\n"
@@ -384,7 +399,7 @@ class StudyWindow(BaseWindow):
             font=("Arial", 14),
             justify="center"
         ).pack(expand=True)
-        
+
         ttk.Button(
             main_frame,
             text="Return to Main Menu",
@@ -401,17 +416,18 @@ class StudyWindow(BaseWindow):
 
     def add_button_hover_effects(self):
         """Add hover effects to buttons"""
-        def on_enter(button, style):
-            button.configure(style=f"{style}.Hover")
-        
-        def on_leave(button, style):
-            button.configure(style=style)
+
+        def on_enter(button_enter, style_enter):
+            button_enter.configure(style=f"{style_enter}.Hover")
+
+        def on_leave(button_leave, style_leave):
+            button_leave.configure(style=style_leave)
 
         # Add hover styles
         hover_styles = {
             "ShowAnswer": {"background": "#2980b9"},  # Darker blue
-            "Correct": {"background": "#218838"},     # Darker green
-            "Wrong": {"background": "#c82333"}        # Darker red
+            "Correct": {"background": "#218838"},  # Darker green
+            "Wrong": {"background": "#c82333"}  # Darker red
         }
 
         for style_name, hover_colors in hover_styles.items():
