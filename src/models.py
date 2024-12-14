@@ -103,40 +103,64 @@ class StudyStats:
         self.stats[class_name].append(session)
         self.save_stats()
 
+    def get_overall_stats(self) -> Dict:
+        """Get overall study statistics grouped by class"""
+        class_groups = {}
+        
+        for class_name, sessions in self.stats.items():
+            # Get base class name (before any number)
+            base_class = class_name.lower().strip()
+            
+            if base_class not in class_groups:
+                class_groups[base_class] = {
+                    'total_sessions': 0,
+                    'total_cards': 0,
+                    'total_correct': 0,
+                    'classes': set()
+                }
+            
+            group = class_groups[base_class]
+            group['total_sessions'] += len(sessions)
+            group['total_cards'] += sum(s['total_cards'] for s in sessions)
+            group['total_correct'] += sum(s['correct'] for s in sessions)
+            group['classes'].add(class_name)
+
+        # Calculate statistics for each group
+        grouped_stats = {}
+        for base_class, stats in class_groups.items():
+            grouped_stats[base_class] = {
+                'total_sessions': stats['total_sessions'],
+                'total_cards': stats['total_cards'],
+                'total_correct': stats['total_correct'],
+                'overall_accuracy': (stats['total_correct'] / stats['total_cards'] * 100) 
+                                  if stats['total_cards'] > 0 else 0,
+                'related_classes': len(stats['classes']),
+                'class_names': sorted(list(stats['classes']))
+            }
+
+        return grouped_stats
+
     def get_class_stats(self, class_name: str) -> Dict:
         """Get statistics for a specific class"""
-        if class_name not in self.stats:
+        base_class = class_name.lower().strip()
+        
+        # Collect all sessions for related classes
+        all_sessions = []
+        for name, sessions in self.stats.items():
+            if name.lower().strip() == base_class:
+                all_sessions.extend(sessions)
+
+        if not all_sessions:
             return {"sessions": 0, "avg_accuracy": 0, "total_cards": 0}
 
-        sessions = self.stats[class_name]
-        total_accuracy = sum(s["accuracy"] for s in sessions)
-        total_cards = sum(s["total_cards"] for s in sessions)
+        total_cards = sum(s['total_cards'] for s in all_sessions)
+        total_correct = sum(s['correct'] for s in all_sessions)
 
         return {
-            "sessions": len(sessions),
-            "avg_accuracy": total_accuracy / len(sessions),
+            "sessions": len(all_sessions),
+            "avg_accuracy": (total_correct / total_cards * 100) if total_cards > 0 else 0,
             "total_cards": total_cards,
-            "history": sessions
-        }
-
-    def get_overall_stats(self) -> Dict:
-        """Get overall study statistics"""
-        total_sessions = sum(len(sessions) for sessions in self.stats.values())
-        total_cards = sum(
-            sum(s["total_cards"] for s in sessions)
-            for sessions in self.stats.values()
-        )
-        total_correct = sum(
-            sum(s["correct"] for s in sessions)
-            for sessions in self.stats.values()
-        )
-
-        return {
-            "total_sessions": total_sessions,
-            "total_cards": total_cards,
-            "total_correct": total_correct,
-            "overall_accuracy": (total_correct / total_cards * 100) if total_cards > 0 else 0,
-            "classes_studied": len(self.stats)
+            "history": all_sessions
         }
 
     def save_stats(self) -> bool:
