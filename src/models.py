@@ -5,12 +5,28 @@ from .utils import save_json, safe_json_load, SETTINGS_FILE, STATS_FILE
 
 
 class Card:
+    DIFFICULTY_COLORS = {
+        'easy': '#28a745',    # Green
+        'medium': '#ffc107',  # Yellow
+        'hard': '#dc3545'     # Red
+    }
+
     def __init__(self, question: str, answer: str, class_name: str):
         self.question = question
         self.answer = answer
         self.class_name = class_name
+        self.difficulty = 'medium'  # Default difficulty
         self.level = 0
         self.next_review = datetime.now()
+
+    def set_difficulty(self, difficulty: str) -> None:
+        """Set card difficulty (easy, medium, hard)"""
+        if difficulty in self.DIFFICULTY_COLORS:
+            self.difficulty = difficulty
+
+    def get_difficulty_color(self) -> str:
+        """Get the color associated with the card's difficulty"""
+        return self.DIFFICULTY_COLORS.get(self.difficulty, self.DIFFICULTY_COLORS['medium'])
 
     def update_level(self, correct: bool) -> None:
         if correct:
@@ -26,6 +42,7 @@ class Card:
             "question": self.question,
             "answer": self.answer,
             "class_name": self.class_name,
+            "difficulty": self.difficulty,
             "level": self.level,
             "next_review": self.next_review.isoformat()
         }
