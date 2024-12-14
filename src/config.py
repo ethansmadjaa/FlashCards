@@ -87,6 +87,21 @@ STYLES = {
         "foreground": "#2c3e50",
         "selectbackground": "#34495e",
         "selectforeground": "#ffffff"
+    },
+    "Easy.TButton": {
+        "background": "#28a745",
+        "foreground": "#ffffff",
+        "padding": 5
+    },
+    "Medium.TButton": {
+        "background": "#ffc107",
+        "foreground": "#000000",
+        "padding": 5
+    },
+    "Hard.TButton": {
+        "background": "#dc3545",
+        "foreground": "#ffffff",
+        "padding": 5
     }
 }
 
