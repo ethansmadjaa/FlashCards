@@ -2,821 +2,1196 @@
   {
     "question": "What is the difference between logistic and linear regression?",
     "answer": "Linear regression is used for predicting continuous values, whereas logistic regression is used for binary classification tasks.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of feature scaling?",
     "answer": "Feature scaling ensures that all features contribute equally to the model and speeds up convergence in gradient descent by standardizing ranges of features.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of the sigmoid function in logistic regression?",
     "answer": "The sigmoid function maps predicted values to probabilities between 0 and 1, making logistic regression suitable for classification tasks.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is overfitting in decision trees?",
     "answer": "Overfitting occurs when a decision tree becomes overly complex, capturing noise in the training data and performing poorly on unseen data.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the Gini Index used for in decision trees?",
     "answer": "The Gini Index is used to measure the impurity of a dataset, helping determine the best feature for splitting data in decision trees.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "How does regularization prevent overfitting?",
     "answer": "Regularization adds a penalty to the cost function to discourage large coefficients, reducing model complexity and improving generalization.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between pre-pruning and post-pruning?",
     "answer": "Pre-pruning stops the tree growth early by setting constraints, while post-pruning trims branches after the tree is fully grown.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of one-vs-all classification?",
     "answer": "One-vs-all divides a multiclass classification problem into multiple binary classification problems, one for each class.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the information gain in decision trees?",
     "answer": "Information gain measures the reduction in entropy after a dataset is split on an attribute, guiding feature selection.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the role of hyperparameter tuning?",
     "answer": "Hyperparameter tuning optimizes model performance by finding the best values for parameters like learning rate, regularization strength, or tree depth.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between entropy and Gini Index?",
     "answer": "Entropy measures the disorder of a dataset, while Gini Index measures the probability of misclassification.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the decision boundary in logistic regression?",
     "answer": "The decision boundary is the threshold where the model classifies data points into different classes based on predicted probabilities.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "Why is regularization important in logistic regression?",
     "answer": "Regularization helps avoid overfitting by penalizing large weights, improving generalization to unseen data.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the cost function in logistic regression?",
     "answer": "The cost function in logistic regression is the log-loss or cross-entropy, which measures the difference between predicted probabilities and actual labels.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of gradient descent?",
     "answer": "Gradient descent minimizes the cost function by iteratively adjusting model parameters in the direction of the steepest descent.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between classification and regression trees?",
     "answer": "Classification trees predict categorical outcomes, while regression trees predict continuous numerical values.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is feature selection in decision trees?",
     "answer": "Feature selection identifies the most relevant features for splitting the dataset and reducing impurity.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is pruning in decision trees?",
     "answer": "Pruning removes unnecessary branches from a decision tree to reduce overfitting and improve model generalization.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the role of the max_depth parameter in decision trees?",
     "answer": "The max_depth parameter limits the depth of the tree, helping control overfitting by restricting the number of splits.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is a terminal node in a decision tree?",
     "answer": "A terminal node, or leaf node, represents the final output or decision of a branch in the tree.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "How does the CART algorithm work?",
     "answer": "CART creates binary splits using the Gini Index for classification and Mean Squared Error for regression.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is a decision tree\u2019s root node?",
     "answer": "The root node is the topmost node of a decision tree, representing the entire dataset before any split.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is cross-validation in machine learning?",
     "answer": "Cross-validation splits data into training and validation sets to evaluate model performance and reduce overfitting.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of softmax regression?",
     "answer": "Softmax regression generalizes logistic regression for multiclass classification by predicting probabilities for all classes.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the function of the train_test_split method?",
     "answer": "The train_test_split method divides the dataset into training and testing subsets to evaluate model performance.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is ROC-AUC in model evaluation?",
     "answer": "ROC-AUC evaluates a model's ability to distinguish between classes by plotting True Positive Rate vs. False Positive Rate.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of early stopping?",
     "answer": "Early stopping prevents overfitting by halting training when model performance on validation data stops improving.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is a leaf node in a decision tree?",
     "answer": "A leaf node represents the outcome or prediction at the end of a branch in the tree.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is bagging in ensemble learning?",
     "answer": "Bagging combines predictions from multiple models trained on random subsets of data to improve performance.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is boosting in ensemble learning?",
     "answer": "Boosting sequentially trains models to correct errors of previous models, improving overall accuracy.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is a confusion matrix?",
     "answer": "A confusion matrix is a table that summarizes the performance of a classification model by showing true and false predictions.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of feature scaling in gradient descent?",
     "answer": "Feature scaling ensures that features are on the same scale, leading to faster convergence during gradient descent.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between variance and bias in machine learning?",
     "answer": "Variance measures overfitting, while bias measures underfitting in a machine learning model.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between entropy and information gain?",
     "answer": "Entropy measures impurity, while information gain measures the reduction in impurity after a split.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of the l1_ratio in elastic net regression?",
     "answer": "The l1_ratio balances the mix of L1 (Lasso) and L2 (Ridge) penalties in elastic net regression.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is mean squared error (MSE) in regression?",
     "answer": "MSE measures the average squared difference between predicted and actual values in regression models.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the difference between softmax and sigmoid functions?",
     "answer": "Sigmoid maps predictions to probabilities for binary classification, while softmax does so for multiclass classification.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is the purpose of the penalty parameter in logistic regression?",
     "answer": "The penalty parameter specifies the type of regularization (L1, L2, or none) applied to the model.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is grid search in hyperparameter tuning?",
     "answer": "Grid search exhaustively tests combinations of hyperparameters to find the best-performing configuration.",
-    "class_name": "machine learning"
+    "class_name": "Machine Learning"
   },
   {
     "question": "What is Big Data in the context of traditional computer science?",
     "answer": "Big Data refers to data that will not fit in main memory.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the 3Vs of Big Data?",
     "answer": "The 3Vs of Big Data are Volume, Variety, and Velocity.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does 'Volume' refer to in Big Data characteristics?",
     "answer": "Volume refers to the scale of data, which grows exponentially each year.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does 'Variety' refer to in Big Data?",
     "answer": "Variety refers to different types of data, such as structured, semi-structured, and unstructured data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is meant by 'Velocity' in Big Data?",
     "answer": "Velocity refers to the speed at which data is generated and processed.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the goal of Big Data analytics?",
     "answer": "The goal is to generalize or summarize the data to create useful insights.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the two types of analytics discussed in the lecture?",
     "answer": "Descriptive analytics and predictive analytics.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the difference between descriptive and predictive analytics?",
     "answer": "Descriptive analytics describes the data itself, while predictive analytics creates something generalizable to new data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is Hadoop's role in Big Data processing?",
     "answer": "Hadoop provides distributed storage (HDFS) and a computation model (MapReduce) for processing large datasets.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the Spark framework used for?",
     "answer": "Spark is used for large-scale data processing, offering faster computation than MapReduce and supporting machine learning libraries like MLlib.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is HDFS?",
     "answer": "HDFS stands for Hadoop Distributed File System, used for storing large datasets across multiple nodes.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "How does traditional analytics differ from Big Data analytics?",
     "answer": "Traditional analytics handles smaller datasets using sampling, while Big Data analytics processes entire datasets in real-time.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does 'Veracity' refer to in Big Data?",
     "answer": "Veracity refers to the quality and trustworthiness of the data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "Why is visualization important in Big Data?",
     "answer": "Visualization helps interpret and communicate insights from large datasets effectively.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does the term 'Value' signify in the context of Big Data?",
     "answer": "Value signifies the meaningful insights and business benefits derived from Big Data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the purpose of the MapReduce programming model?",
     "answer": "MapReduce is used for processing large datasets in a distributed and parallel manner.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the two main functions in MapReduce?",
     "answer": "The two main functions are Map and Reduce.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does the Map function do in MapReduce?",
     "answer": "The Map function processes input data and produces key-value pairs.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the role of the Reduce function in MapReduce?",
     "answer": "The Reduce function aggregates or summarizes the intermediate key-value pairs produced by the Map function.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "Why is MapReduce suitable for Big Data processing?",
     "answer": "MapReduce is suitable because it distributes data processing across multiple nodes, allowing for scalability and fault tolerance.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does 'bringing computation to the data' mean in MapReduce?",
     "answer": "It means performing computation where the data is stored to avoid the cost of moving large amounts of data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the main challenges in IO cluster computing?",
     "answer": "Node failure, network bottlenecks, and the complexity of traditional distributed programming.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is a Distributed File System (DFS) in the context of MapReduce?",
     "answer": "A DFS stores data across multiple nodes and ensures data availability and fault tolerance.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is an example of a Distributed File System used with MapReduce?",
     "answer": "HDFS (Hadoop Distributed File System).",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the shuffle step in MapReduce?",
     "answer": "The shuffle step sorts and groups intermediate key-value pairs by key before passing them to the Reduce function.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "How does MapReduce handle node failures?",
     "answer": "MapReduce handles node failures by replicating data and reassigning tasks to other nodes.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the significance of the word count example in MapReduce?",
     "answer": "It demonstrates how to use the Map and Reduce functions to count the frequency of words in a large document.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is a key-value pair in the context of MapReduce?",
     "answer": "A key-value pair is a data structure where the key represents a unique identifier, and the value holds associated data.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What type of tasks are most suitable for MapReduce?",
     "answer": "Tasks involving large-scale data processing, such as data aggregation, sorting, and filtering.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "Why is network throughput a challenge in distributed computing?",
     "answer": "Because transferring large datasets between nodes can become a bottleneck, slowing down computation.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the purpose of the MapReduce framework?",
     "answer": "MapReduce is a programming model for processing large datasets in a distributed and parallel manner.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the three main phases of the MapReduce workflow?",
     "answer": "The three main phases are Map, Shuffle and Sort, and Reduce.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the role of the Map function in MapReduce?",
     "answer": "The Map function processes input data and produces intermediate key-value pairs.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What does the Reduce function do in MapReduce?",
     "answer": "The Reduce function aggregates or processes the intermediate key-value pairs produced by the Map function.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "How does Hadoop achieve fault tolerance?",
     "answer": "Hadoop achieves fault tolerance through data replication and re-execution of failed tasks.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is HDFS and why is it important for MapReduce?",
     "answer": "HDFS (Hadoop Distributed File System) is a storage system that stores large datasets across multiple nodes and supports distributed processing.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the significance of data locality in MapReduce?",
     "answer": "Data locality ensures computation is performed on the node where the data resides to minimize data transfer.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the purpose of the Shuffle and Sort phase in MapReduce?",
     "answer": "Shuffle and Sort organizes the intermediate key-value pairs by key before passing them to the Reduce function.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is YARN in the Hadoop ecosystem?",
     "answer": "YARN is a resource management framework that allows multiple applications to run on a Hadoop cluster.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are some advantages of using MapReduce?",
     "answer": "Advantages include simplicity, scalability to large clusters, and automatic fault tolerance.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the function of the NameNode in HDFS?",
     "answer": "The NameNode manages the file system metadata and keeps track of where data blocks are stored.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the role of DataNodes in HDFS?",
     "answer": "DataNodes store the actual data blocks and serve read and write requests from clients.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the default replication factor in HDFS?",
     "answer": "The default replication factor in HDFS is 3.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What type of tasks is MapReduce suitable for?",
     "answer": "MapReduce is suitable for tasks like data aggregation, sorting, and distributed data processing.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is an example of a simple MapReduce program?",
     "answer": "A word count program, which counts the occurrences of each word in a large dataset.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is Apache Spark designed for?",
     "answer": "Apache Spark is designed for large-scale data processing with a focus on speed and in-memory computation.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are Resilient Distributed Datasets (RDDs)?",
     "answer": "RDDs are distributed collections of data that are fault-tolerant and can be processed in parallel.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are the main languages supported by Spark's Core API?",
     "answer": "Java, Scala, and Python.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the primary advantage of Spark over Hadoop MapReduce?",
     "answer": "Spark performs in-memory computations, making it much faster for iterative tasks compared to Hadoop MapReduce.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the role of the SparkContext in a Spark application?",
     "answer": "The SparkContext acts as the entry point to a Spark application and is used to build RDDs.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is a transformation in Spark?",
     "answer": "A transformation is an operation that creates a new RDD from an existing RDD.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is an action in Spark?",
     "answer": "An action triggers the execution of transformations and returns a result or writes data to storage.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is lazy evaluation in Spark?",
     "answer": "Lazy evaluation means that transformations are not executed until an action is called.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are accumulators used for in Spark?",
     "answer": "Accumulators are used for aggregating values across tasks in a distributed manner.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What are broadcast variables in Spark?",
     "answer": "Broadcast variables allow large read-only data to be efficiently distributed to all worker nodes.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "How does Spark handle fault tolerance?",
     "answer": "Spark handles fault tolerance by using RDD lineage to recompute lost data partitions.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the function of an executor in Spark?",
     "answer": "An executor runs tasks and stores data for a Spark application.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the role of the cluster manager in Spark?",
     "answer": "The cluster manager allocates resources to Spark applications.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the purpose of the `map()` transformation in Spark?",
     "answer": "The `map()` transformation applies a function to each element in the RDD and returns a new RDD.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is the difference between narrow and wide dependencies in Spark?",
     "answer": "Narrow dependencies have one-to-one relationships between partitions, while wide dependencies involve shuffling data between partitions.",
-    "class_name": "big data"
+    "class_name": "Big data frameworks"
   },
   {
     "question": "What is Business Intelligence (BI)?",
     "answer": "Business Intelligence (BI) refers to the applications, infrastructure, tools, and best practices for transforming data into actionable insights.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the key goals of Business Intelligence?",
     "answer": "The key goals of BI are to help enterprise users make better strategic, tactical, and operational decisions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the four types of analytics in BI?",
     "answer": "The four types of analytics are Descriptive, Diagnostic, Predictive, and Prescriptive analytics.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does Descriptive Analytics focus on?",
     "answer": "Descriptive Analytics focuses on explaining what happened by summarizing historical data.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is Diagnostic Analytics used for?",
     "answer": "Diagnostic Analytics is used to explain why something happened by identifying patterns and relationships in data.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does Predictive Analytics aim to do?",
     "answer": "Predictive Analytics aims to forecast what is likely to happen based on historical data and trends.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is Prescriptive Analytics?",
     "answer": "Prescriptive Analytics recommends actions to achieve desired outcomes based on predictive models.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are some tools commonly used in BI for data querying?",
     "answer": "Common BI tools for data querying include SQL and data warehousing systems.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the key components of a BI architecture?",
     "answer": "The key components include source systems, data integration, analytics data stores, BI tools, and information delivery.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the role of data visualization in BI?",
     "answer": "Data visualization helps represent data in dashboards and reports to make insights easier to understand.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What challenges are commonly faced in BI projects?",
     "answer": "Challenges include data existing in multiple places, inconsistent data formats, and different user needs.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does the process of consolidating data involve?",
     "answer": "Consolidating data involves moving, cleaning, and making data consistent for analysis.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a data warehouse?",
     "answer": "A data warehouse is a central repository where data from different sources is stored and organized for analysis.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What types of users benefit from BI?",
     "answer": "Users include executives, business decision makers, information workers, line workers, and analysts.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the benefits of using BI?",
     "answer": "Benefits include fast reporting, better business insights, improved decision-making, and increased operational efficiency.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a data warehouse?",
     "answer": "A data warehouse is a system for collecting, managing, and analyzing data from multiple sources to provide business insights.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the four key characteristics of a data warehouse?",
     "answer": "The four characteristics are subject-oriented, integrated, time-variant, and non-volatile.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the difference between OLTP and OLAP?",
     "answer": "OLTP handles day-to-day transactions with simple queries, while OLAP handles analytical processing with complex queries.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the purpose of the ETL process in a data warehouse?",
     "answer": "The ETL process extracts, transforms, and loads data into the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does 'subject-oriented' mean in the context of data warehouses?",
     "answer": "Subject-oriented means data is organized by business subjects, such as sales, customers, or products.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Why is a data warehouse considered 'non-volatile'?",
     "answer": "Data in a data warehouse is not updated or deleted; it is only loaded, refreshed, and queried.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a data mart?",
     "answer": "A data mart is a subset of a data warehouse focused on a specific business function like marketing or finance.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the steps in the development of a data warehouse?",
     "answer": "Steps include requirements collection, logical modeling, ETL, creating the data warehouse, deployment, and maintenance.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are the typical tasks performed during the ETL process?",
     "answer": "The tasks include extracting data, transforming it to fit the data model, and loading it into the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the difference between operational data and analytical data?",
     "answer": "Operational data is used for daily transactions, while analytical data is used for decision-making and reporting.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are some examples of query tools used in data warehousing?",
     "answer": "Examples include reporting tools, application development tools, data mining tools, and OLAP tools.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the role of source systems in a data warehouse?",
     "answer": "Source systems provide the raw data that is extracted and loaded into the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the significance of data integration in a data warehouse?",
     "answer": "Data integration ensures data from different sources is combined and stored in a consistent format.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does 'time-variant' mean in a data warehouse?",
     "answer": "Time-variant means data is stored with historical context, capturing snapshots over time.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Why is data warehouse administration important?",
     "answer": "Administration ensures security, sufficient storage, and backup and recovery procedures for the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a measure in the context of a data warehouse?",
     "answer": "A measure is a data item used to quantify the performance or behavior of a business process.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a dimension in a data warehouse?",
     "answer": "A dimension is an entity that provides context to measures, such as Product, Customer, or Time.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the grain of a dimension?",
     "answer": "The grain is the lowest level of detail available within a dimension.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "How is granularity defined for a measure?",
     "answer": "Granularity of a measure is determined by the combination of grains of all its dimensions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a fact in a data warehouse?",
     "answer": "A fact is a collection of related measures and their associated dimensions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are dimension hierarchies?",
     "answer": "Dimension hierarchies are structures that organize dimensions into multiple levels of aggregation.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are aggregation levels in dimensional modeling?",
     "answer": "Aggregation levels represent different levels of summarization within a dimension hierarchy.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a star schema?",
     "answer": "A star schema consists of a central fact table connected to dimension tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a snowflake schema?",
     "answer": "A snowflake schema is a refinement of a star schema where dimensions are normalized into smaller tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a fact constellation?",
     "answer": "A fact constellation is a schema where multiple fact tables share dimension tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the slice and dice operation in OLAP?",
     "answer": "Slice and dice cuts a data cube to view specific hierarchy nodes or sub-cubes.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the drill-down operation in OLAP?",
     "answer": "Drill-down allows navigating from coarse granularity to finer granularity in data.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What does the roll-up operation do in OLAP?",
     "answer": "Roll-up navigates from finer granularity to coarser granularity, summarizing data.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the pivot operation in OLAP?",
     "answer": "Pivot changes the orientation of dimensions in a data cube for different views.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are some common challenges in data warehousing?",
     "answer": "Challenges include data quality, performance, user acceptance, and designing the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a measure in the context of a data warehouse?",
     "answer": "A measure is a data item used to quantify the performance or behavior of a business process.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a dimension in a data warehouse?",
     "answer": "A dimension is an entity that provides context to measures, such as Product, Customer, or Time.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the grain of a dimension?",
     "answer": "The grain is the lowest level of detail available within a dimension.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "How is granularity defined for a measure?",
     "answer": "Granularity of a measure is determined by the combination of grains of all its dimensions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a fact in a data warehouse?",
     "answer": "A fact is a collection of related measures and their associated dimensions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are dimension hierarchies?",
     "answer": "Dimension hierarchies are structures that organize dimensions into multiple levels of aggregation.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are aggregation levels in dimensional modeling?",
     "answer": "Aggregation levels represent different levels of summarization within a dimension hierarchy.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a star schema?",
     "answer": "A star schema consists of a central fact table connected to dimension tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a snowflake schema?",
     "answer": "A snowflake schema is a refinement of a star schema where dimensions are normalized into smaller tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is a fact constellation?",
     "answer": "A fact constellation is a schema where multiple fact tables share dimension tables.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the slice operation in OLAP?",
     "answer": "The slice operation selects a single dimension value, resulting in a sub-cube by cutting through the data cube along that dimension.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the dice operation in OLAP?",
     "answer": "The dice operation selects multiple dimension values, creating a sub-cube by specifying a range or multiple values in different dimensions.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the drill-down operation in OLAP?",
     "answer": "The drill-down operation allows navigating from a coarser level of granularity to a finer level, breaking data into more detailed parts.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the roll-up operation in OLAP?",
     "answer": "The roll-up operation aggregates data from a finer level of granularity to a coarser level, summarizing detailed data into higher-level summaries.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What is the pivot operation in OLAP?",
     "answer": "Pivot changes the orientation of dimensions in a data cube, allowing data to be viewed from different perspectives.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Can you give an example of the slice operation?",
     "answer": "In a sales data cube, slicing by 'Region = North' results in a sub-cube containing only data for the North region.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Can you give an example of the dice operation?",
     "answer": "In a sales data cube, dicing by 'Region = North' and 'Time = Q1' results in a sub-cube containing only data for the North region in the first quarter.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Can you give an example of the drill-down operation?",
     "answer": "Drilling down from 'Sales by Year' to 'Sales by Quarter' shows more detailed sales data broken down by each quarter.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "Can you give an example of the roll-up operation?",
     "answer": "Rolling up from 'Sales by City' to 'Sales by Country' aggregates city-level sales data into country-level totals.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
   },
   {
     "question": "What are some common challenges in data warehousing?",
     "answer": "Challenges include data quality, performance, user acceptance, and designing the data warehouse.",
-    "class_name": "business intelligence"
+    "class_name": "Business Intelligence"
+  },
+  {
+    "question": "What is relational algebra?",
+    "answer": "Relational algebra is a mathematical system where the operands are relations and operators manipulate these relations to form new relations.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the core operations in relational algebra?",
+    "answer": "The core operations include selection, projection, Cartesian product, joins, union, intersection, and difference.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the selection operation do in relational algebra?",
+    "answer": "Selection filters rows based on a condition, returning tuples that satisfy the condition.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the projection operation in relational algebra?",
+    "answer": "Projection returns a relation with specific columns (attributes) from the original relation.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the Cartesian product in relational algebra?",
+    "answer": "The Cartesian product pairs each tuple from one relation with every tuple from another relation.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a theta-join in relational algebra?",
+    "answer": "A theta-join combines two relations based on a condition involving comparison operators like =, <, or >.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a natural join?",
+    "answer": "A natural join combines two relations by equating attributes with the same name and removes duplicate attributes in the result.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the renaming operation in relational algebra?",
+    "answer": "Renaming gives a new schema to a relation or its attributes to avoid ambiguity.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is an outer join in relational algebra?",
+    "answer": "An outer join includes all tuples from both relations, padding non-matching tuples with NULL values.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How does the union operation work in relational algebra?",
+    "answer": "The union operation combines all tuples from two relations with the same schema, removing duplicates.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the difference between bags and sets in relational algebra?",
+    "answer": "Bags allow duplicate elements, whereas sets do not allow duplicates.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the roll-up operation in OLAP?",
+    "answer": "Roll-up aggregates data to a higher level of granularity, summarizing detailed data.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the drill-down operation in OLAP?",
+    "answer": "Drill-down navigates data from a higher level of granularity to a finer level, breaking down summaries into details.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the slice operation in OLAP?",
+    "answer": "The slice operation selects a single dimension value, creating a sub-cube by cutting through the data cube along that dimension.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the dice operation in OLAP?",
+    "answer": "The dice operation selects multiple dimension values to create a sub-cube that meets specific conditions.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is SQL?",
+    "answer": "SQL (Structured Query Language) is a very-high-level language used for managing and querying relational databases.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the main components of a simple SQL query?",
+    "answer": "A simple SQL query consists of the SELECT, FROM, and WHERE clauses.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the SELECT clause do in an SQL query?",
+    "answer": "The SELECT clause specifies the attributes (columns) to be retrieved from the database.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How does SQL handle NULL values?",
+    "answer": "SQL handles NULL as a special marker for missing or unknown values. Comparisons with NULL result in UNKNOWN.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a theta join in SQL?",
+    "answer": "A theta join is a join that uses an explicit condition involving comparison operators like =, <, or >.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a natural join in SQL?",
+    "answer": "A natural join automatically joins tables by equating attributes with the same name, eliminating duplicate columns.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is an outer join in SQL?",
+    "answer": "An outer join returns all matching rows and includes non-matching rows by padding them with NULL values.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the GROUP BY clause in SQL?",
+    "answer": "The GROUP BY clause groups rows that have the same values in specified columns, allowing aggregation on each group.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the HAVING clause do in SQL?",
+    "answer": "The HAVING clause filters groups of rows based on conditions applied to aggregate functions.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a subquery in SQL?",
+    "answer": "A subquery is a nested query used within another SQL query to provide intermediate results.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the difference between UNION and UNION ALL in SQL?",
+    "answer": "UNION eliminates duplicate rows, while UNION ALL includes all rows, including duplicates.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the IN operator used for in SQL?",
+    "answer": "The IN operator checks if a value exists within a set of values returned by a subquery.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are aggregation functions in SQL?",
+    "answer": "Aggregation functions like SUM, AVG, COUNT, MIN, and MAX perform calculations on groups of rows.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the ORDER BY clause in SQL?",
+    "answer": "The ORDER BY clause sorts the results of a query based on one or more columns.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a correlated subquery?",
+    "answer": "A correlated subquery is a subquery that references columns from the outer query and is evaluated for each row of the outer query.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a constraint in a database?",
+    "answer": "A constraint is a relationship among data elements that the DBMS enforces to maintain data integrity.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the difference between PRIMARY KEY and UNIQUE constraints?",
+    "answer": "A PRIMARY KEY uniquely identifies each tuple and cannot contain NULL values, whereas a UNIQUE constraint allows NULL values and can be used on multiple attributes.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a foreign key constraint?",
+    "answer": "A foreign key constraint ensures that values in one table correspond to values in another table, maintaining referential integrity.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the possible policies for handling foreign key violations?",
+    "answer": "Policies include rejecting the modification (default), cascading changes (`CASCADE`), or setting the foreign key to NULL (`SET NULL`).",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you declare a multiattribute primary key in SQL?",
+    "answer": "Use the PRIMARY KEY clause with multiple attributes, e.g., `PRIMARY KEY (attribute1, attribute2)`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is an assertion in SQL?",
+    "answer": "An assertion is a database-schema element used to enforce complex conditions across multiple tables.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you create an assertion in SQL?",
+    "answer": "Use the `CREATE ASSERTION` statement with a condition, e.g., `CREATE ASSERTION assertion_name CHECK (condition)`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a trigger in a database?",
+    "answer": "A trigger is a mechanism that automatically executes a specified action when a particular event occurs in the database.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the components of an Event-Condition-Action (ECA) rule?",
+    "answer": "The components are the event (modification type), the condition (a boolean expression), and the action (SQL statements).",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What types of events can a trigger respond to?",
+    "answer": "Triggers can respond to `INSERT`, `DELETE`, or `UPDATE` events.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the difference between row-level and statement-level triggers?",
+    "answer": "Row-level triggers execute once for each modified row, while statement-level triggers execute once per SQL statement.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the REFERENCING clause in a trigger do?",
+    "answer": "The REFERENCING clause allows access to the new or old tuple/table affected by the event.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you define a trigger that fires after an update on a specific attribute?",
+    "answer": "Use `AFTER UPDATE OF attribute` in the trigger definition.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a use case for the `INSTEAD OF` trigger?",
+    "answer": "`INSTEAD OF` triggers are used to handle modifications on views by translating them into appropriate changes on base tables.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is an example of a trigger that maintains a list of bars that increase beer prices by more than $1?",
+    "answer": "CREATE TRIGGER PriceTrig AFTER UPDATE OF price ON Sells REFERENCING OLD ROW AS ooo NEW ROW AS nnn FOR EACH ROW WHEN (nnn.price > ooo.price + 1.00) INSERT INTO RipoffBars VALUES(nnn.bar);",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a transaction in SQL?",
+    "answer": "A transaction is a process involving database queries and/or modifications that ensures data integrity.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the ACID properties of transactions?",
+    "answer": "The ACID properties are Atomicity, Consistency, Isolation, and Durability.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the COMMIT statement do in SQL?",
+    "answer": "The COMMIT statement makes all the changes made by the transaction permanent in the database.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the ROLLBACK statement?",
+    "answer": "The ROLLBACK statement undoes all changes made by the current transaction, aborting it.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the default behavior of autocommit mode in SQL?",
+    "answer": "Autocommit mode is on by default, meaning each SQL statement is automatically committed.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the SERIALIZABLE isolation level?",
+    "answer": "SERIALIZABLE is the highest isolation level, ensuring transactions appear to execute one after another.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a dirty read in SQL?",
+    "answer": "A dirty read occurs when a transaction reads data that has been modified by another transaction but not yet committed.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a fuzzy read (non-repeatable read)?",
+    "answer": "A fuzzy read occurs when a transaction reads the same row twice but gets different values each time due to concurrent modifications.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a phantom read?",
+    "answer": "A phantom read occurs when a transaction executes the same query twice and sees different sets of rows due to inserts or deletes by other transactions.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How can you set the isolation level of a transaction?",
+    "answer": "Use the `SET TRANSACTION ISOLATION LEVEL` statement before executing the first statement of the transaction.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What isolation levels are defined in SQL?",
+    "answer": "The isolation levels are SERIALIZABLE, REPEATABLE READ, READ COMMITTED, and READ UNCOMMITTED.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What happens if a constraint is violated during a transaction?",
+    "answer": "The transaction is automatically rolled back if a constraint violation occurs.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the START TRANSACTION statement?",
+    "answer": "The START TRANSACTION statement explicitly begins a new transaction.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you manage transactions in JDBC?",
+    "answer": "Use methods like `Connection.setTransactionIsolation(int)`, `Connection.commit()`, and `Connection.rollback()` in JDBC.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the `Connection.rollback()` method in JDBC?",
+    "answer": "The `Connection.rollback()` method aborts the current transaction and undoes any changes made during the transaction.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does SQL/PSM stand for?",
+    "answer": "SQL/PSM stands for Persistent Stored Modules, which allow procedures and functions to be stored as part of the database schema.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you create a stored procedure in SQL/PSM?",
+    "answer": "Use the syntax: `CREATE PROCEDURE <name> (<parameter list>) <body>;`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What are the three parameter modes in SQL/PSM?",
+    "answer": "The three modes are `IN` (input), `OUT` (output), and `INOUT` (both input and output).",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the difference between a stored procedure and a function in SQL/PSM?",
+    "answer": "A stored procedure performs operations without returning a value, while a function returns a value using the `RETURNS` clause.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you invoke a stored procedure in SQL/PSM?",
+    "answer": "Use the `CALL` statement, e.g., `CALL procedure_name(argument1, argument2);`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What does the `DECLARE` statement do in SQL/PSM?",
+    "answer": "The `DECLARE` statement declares local variables within a procedure or function.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of the `BEGIN...END` block in SQL/PSM?",
+    "answer": "It groups multiple statements together, allowing them to be executed as a single unit.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you assign a value to a variable in SQL/PSM?",
+    "answer": "Use the `SET` statement, e.g., `SET variable_name = expression;`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you create a loop in SQL/PSM?",
+    "answer": "Use `LOOP...END LOOP` or other loop structures like `WHILE...END WHILE` and `REPEAT...UNTIL...END REPEAT`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is a cursor in SQL/PSM?",
+    "answer": "A cursor is a mechanism for iterating over the rows returned by a query.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you declare a cursor in SQL/PSM?",
+    "answer": "Use the `DECLARE cursor_name CURSOR FOR <query>` statement.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How do you fetch the next row from a cursor?",
+    "answer": "Use the `FETCH FROM cursor_name INTO variable_list;` statement.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the purpose of `SQLSTATE` in SQL/PSM?",
+    "answer": "`SQLSTATE` is a variable that holds the status of the last SQL operation, used for error handling.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "How can you exit a loop in SQL/PSM?",
+    "answer": "Use the `LEAVE` statement, e.g., `LEAVE loop_name;`.",
+    "class_name": "Advanced databases"
+  },
+  {
+    "question": "What is the structure of a cursor loop for processing multiple rows?",
+    "answer": "The structure is: `LOOP FETCH cursor INTO variables; IF condition THEN LEAVE loop_name; END IF; END LOOP;`.",
+    "class_name": "Advanced databases"
   }
 ]
