@@ -7,7 +7,7 @@ from .base import BaseWindow
 from ..config import STUDY_WINDOW_SIZE, CLASS_SELECTION_SIZE, ENABLE_ANIMATIONS, \
     ANIMATION_DURATION, DEFAULT_CARDS_PER_SESSION
 from ..models import StudyStats, Settings
-from ..utils import load_cards_for_class, get_available_classes
+from ..utils import load_cards_for_class, get_available_classes, safe_json_load, save_json, FLASHCARD_FILE
 
 
 def get_grade_info(accuracy):
@@ -161,6 +161,26 @@ class StudyWindow(BaseWindow):
         )
         self.wrong_btn.pack(side="left", padx=10)
 
+        # Add difficulty buttons
+        self.difficulty_frame = ttk.Frame(self.button_frame)
+        self.difficulty_frame.pack(pady=10)
+        
+        ttk.Label(
+            self.difficulty_frame,
+            text="Difficulty:",
+            font=("Arial", 11)
+        ).pack(side="left", padx=5)
+
+        for diff in ['easy', 'medium', 'hard']:
+            btn = ttk.Button(
+                self.difficulty_frame,
+                text=self.get_difficulty_emoji(diff),
+                command=lambda d=diff: self.set_card_difficulty(d),
+                width=10,
+                style=f"{diff.capitalize()}.TButton"
+            )
+            btn.pack(side="left", padx=5)
+
         # Add hover effects
         self.add_button_hover_effects()
 
@@ -172,27 +192,29 @@ class StudyWindow(BaseWindow):
 
         card = self.cards[self.current_index]
         progress = f"📝 Card {self.current_index + 1} of {len(self.cards)}"
+        difficulty = card.get('difficulty', 'medium')
+        difficulty_text = self.get_difficulty_emoji(difficulty)
 
         if self.answer_showing:
-            self.card_frame.configure(text="❓ Question & 💡 Answer")
             content = (
-                f"{progress}\n\n"
-                f"━━━━━━━━━━━━━━━━━━━��━━\n\n"
+                f"{progress} - {difficulty_text}\n\n"
+                f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
                 f"Question:\n{card['question']}\n\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
                 f"Answer:\n{card['answer']}"
             )
             self.show_answer_btn.configure(text="🔒 Hide Answer (Space)")
             self.answer_frame.pack()
+            self.difficulty_frame.pack()
         else:
-            self.card_frame.configure(text="❓ Question")
             content = (
-                f"{progress}\n\n"
+                f"{progress} - {difficulty_text}\n\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
                 f"Question:\n{card['question']}"
             )
             self.show_answer_btn.configure(text="🔍 Show Answer (Space)")
             self.answer_frame.pack_forget()
+            self.difficulty_frame.pack_forget()
 
         self.content_label.configure(text=content)
 
@@ -500,6 +522,35 @@ class StudyWindow(BaseWindow):
         if messagebox.askokcancel("Quit Study Session", message + "\n\nAre you sure you want to quit?"):
             # Return to main menu
             self.return_to_main()
+
+    def get_difficulty_emoji(self, difficulty: str) -> str:
+        """Get emoji for difficulty level"""
+        emojis = {
+            'easy': '🟢 Easy',
+            'medium': '🟡 Medium',
+            'hard': '🔴 Hard'
+        }
+        return emojis.get(difficulty, '🟡 Medium')
+
+    def set_card_difficulty(self, difficulty: str) -> None:
+        """Set difficulty for current card"""
+        if self.current_index < len(self.cards):
+            # Update card difficulty
+            cards = safe_json_load(FLASHCARD_FILE, [])
+            card_index = self.cards[self.current_index]  # Get current card
+            
+            # Find and update the card in the main deck
+            for card in cards:
+                if (card['question'] == card_index['question'] and 
+                    card['class_name'] == card_index['class_name']):
+                    card['difficulty'] = difficulty
+                    break
+            
+            # Save updated cards
+            if save_json(FLASHCARD_FILE, cards):
+                # Update UI to show new difficulty
+                self.show_current_card()
+                self.set_status(f"Card difficulty set to {difficulty}", 2000)
 
 
 class ClassSelectionWindow(BaseWindow):
