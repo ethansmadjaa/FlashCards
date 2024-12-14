@@ -570,11 +570,6 @@
     "class_name": "Business Intelligence"
   },
   {
-    "question": "What is a data warehouse?",
-    "answer": "A data warehouse is a system for collecting, managing, and analyzing data from multiple sources to provide business insights.",
-    "class_name": "Business Intelligence"
-  },
-  {
     "question": "What are the four key characteristics of a data warehouse?",
     "answer": "The four characteristics are subject-oriented, integrated, time-variant, and non-volatile.",
     "class_name": "Business Intelligence"
@@ -720,56 +715,6 @@
     "class_name": "Business Intelligence"
   },
   {
-    "question": "What is a measure in the context of a data warehouse?",
-    "answer": "A measure is a data item used to quantify the performance or behavior of a business process.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is a dimension in a data warehouse?",
-    "answer": "A dimension is an entity that provides context to measures, such as Product, Customer, or Time.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is the grain of a dimension?",
-    "answer": "The grain is the lowest level of detail available within a dimension.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "How is granularity defined for a measure?",
-    "answer": "Granularity of a measure is determined by the combination of grains of all its dimensions.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is a fact in a data warehouse?",
-    "answer": "A fact is a collection of related measures and their associated dimensions.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What are dimension hierarchies?",
-    "answer": "Dimension hierarchies are structures that organize dimensions into multiple levels of aggregation.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What are aggregation levels in dimensional modeling?",
-    "answer": "Aggregation levels represent different levels of summarization within a dimension hierarchy.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is a star schema?",
-    "answer": "A star schema consists of a central fact table connected to dimension tables.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is a snowflake schema?",
-    "answer": "A snowflake schema is a refinement of a star schema where dimensions are normalized into smaller tables.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is a fact constellation?",
-    "answer": "A fact constellation is a schema where multiple fact tables share dimension tables.",
-    "class_name": "Business Intelligence"
-  },
-  {
     "question": "What is the slice operation in OLAP?",
     "answer": "The slice operation selects a single dimension value, resulting in a sub-cube by cutting through the data cube along that dimension.",
     "class_name": "Business Intelligence"
@@ -780,18 +725,8 @@
     "class_name": "Business Intelligence"
   },
   {
-    "question": "What is the drill-down operation in OLAP?",
-    "answer": "The drill-down operation allows navigating from a coarser level of granularity to a finer level, breaking data into more detailed parts.",
-    "class_name": "Business Intelligence"
-  },
-  {
     "question": "What is the roll-up operation in OLAP?",
     "answer": "The roll-up operation aggregates data from a finer level of granularity to a coarser level, summarizing detailed data into higher-level summaries.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What is the pivot operation in OLAP?",
-    "answer": "Pivot changes the orientation of dimensions in a data cube, allowing data to be viewed from different perspectives.",
     "class_name": "Business Intelligence"
   },
   {
@@ -812,11 +747,6 @@
   {
     "question": "Can you give an example of the roll-up operation?",
     "answer": "Rolling up from 'Sales by City' to 'Sales by Country' aggregates city-level sales data into country-level totals.",
-    "class_name": "Business Intelligence"
-  },
-  {
-    "question": "What are some common challenges in data warehousing?",
-    "answer": "Challenges include data quality, performance, user acceptance, and designing the data warehouse.",
     "class_name": "Business Intelligence"
   },
   {
@@ -872,26 +802,6 @@
   {
     "question": "What is the difference between bags and sets in relational algebra?",
     "answer": "Bags allow duplicate elements, whereas sets do not allow duplicates.",
-    "class_name": "Advanced databases"
-  },
-  {
-    "question": "What is the roll-up operation in OLAP?",
-    "answer": "Roll-up aggregates data to a higher level of granularity, summarizing detailed data.",
-    "class_name": "Advanced databases"
-  },
-  {
-    "question": "What is the drill-down operation in OLAP?",
-    "answer": "Drill-down navigates data from a higher level of granularity to a finer level, breaking down summaries into details.",
-    "class_name": "Advanced databases"
-  },
-  {
-    "question": "What is the slice operation in OLAP?",
-    "answer": "The slice operation selects a single dimension value, creating a sub-cube by cutting through the data cube along that dimension.",
-    "class_name": "Advanced databases"
-  },
-  {
-    "question": "What is the dice operation in OLAP?",
-    "answer": "The dice operation selects multiple dimension values to create a sub-cube that meets specific conditions.",
     "class_name": "Advanced databases"
   },
   {
