@@ -37,30 +37,13 @@ class StatisticsWindow(BaseWindow):
             foreground="#2c3e50"
         ).pack(pady=20)
 
-        # Overall Stats Frame
-        overall_frame = ttk.LabelFrame(main_frame, text="Overall Statistics", padding=20)
-        overall_frame.pack(fill="x", padx=40, pady=10)
+        # Create container for scrollable content
+        content_frame = ttk.Frame(main_frame)
+        content_frame.pack(fill="both", expand=True, padx=20, pady=(0, 20))
 
-        overall_stats = self.stats.get_overall_stats()
-        ttk.Label(
-            overall_frame,
-            text=(
-                f"Total Study Sessions: {overall_stats['total_sessions']}\n"
-                f"Total Cards Studied: {overall_stats['total_cards']}\n"
-                f"Overall Accuracy: {overall_stats['overall_accuracy']:.1f}%\n"
-                f"Classes Studied: {overall_stats['classes_studied']}"
-            ),
-            font=("Arial", 14),
-            justify="center"
-        ).pack(pady=10)
-
-        # Class Stats
-        class_stats_frame = ttk.LabelFrame(main_frame, text="Statistics by Class", padding=20)
-        class_stats_frame.pack(fill="both", expand=True, padx=40, pady=10)
-
-        # Create scrollable frame
-        canvas = tk.Canvas(class_stats_frame, bg="#ffffff")
-        scrollbar = ttk.Scrollbar(class_stats_frame, orient="vertical", command=canvas.yview)
+        # Create scrollable frame for class groups
+        canvas = tk.Canvas(content_frame, bg="#ffffff")
+        scrollbar = ttk.Scrollbar(content_frame, orient="vertical", command=canvas.yview)
         scrollable_frame = ttk.Frame(canvas)
 
         # Configure scrolling
@@ -68,67 +51,56 @@ class StatisticsWindow(BaseWindow):
             "<Configure>",
             lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
         )
-        canvas.bind(
-            "<Configure>",
-            lambda e: canvas.itemconfig(
-                canvas_frame, width=e.width
-            )
-        )
 
-        # Create window in canvas
-        canvas_frame = canvas.create_window(
-            (0, 0),
-            window=scrollable_frame,
-            anchor="nw"
-        )
-
-        # Configure canvas and scrollbar
+        canvas_frame = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.bind("<Configure>", lambda e: canvas.itemconfig(canvas_frame, width=e.width))
         canvas.configure(yscrollcommand=scrollbar.set)
-        canvas.pack(side="left", fill="both", expand=True, padx=5, pady=5)
+
+        # Get grouped statistics
+        grouped_stats = self.stats.get_overall_stats()
+
+        # Add statistics for each class group
+        for base_class, stats in sorted(grouped_stats.items()):
+            class_frame = ttk.LabelFrame(
+                scrollable_frame,
+                text=f"📚 {base_class.title()}",
+                padding=20
+            )
+            class_frame.pack(fill="x", padx=20, pady=10)
+
+            accuracy = stats['overall_accuracy']
+            grade, message, color = get_grade_info(accuracy)
+
+            ttk.Label(
+                class_frame,
+                text=(
+                    f"Grade: {grade}\n"
+                    f"Total Sessions: {stats['total_sessions']}\n"
+                    f"Cards Studied: {stats['total_cards']}\n"
+                    f"Overall Accuracy: {accuracy:.1f}%\n"
+                    f"Related Classes: {stats['related_classes']}\n"
+                    f"{message}"
+                ),
+                font=("Arial", 12),
+                foreground=color,
+                justify="center"
+            ).pack(pady=5)
+
+        # Pack canvas and scrollbar
+        canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
-        # Add class statistics
-        if not self.stats.stats:
-            ttk.Label(
-                scrollable_frame,
-                text="No study sessions recorded yet.\nComplete some study sessions to see statistics!",
-                font=("Arial", 12),
-                justify="center"
-            ).pack(pady=20)
-        else:
-            for class_name in sorted(self.stats.stats.keys()):
-                class_frame = ttk.LabelFrame(
-                    scrollable_frame,
-                    text=f"📚 {class_name}",
-                    padding=10
-                )
-                class_frame.pack(fill="x", padx=5, pady=5)
+        # Return button in a separate frame at the bottom
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill="x", pady=20)
 
-                stats = self.stats.get_class_stats(class_name)
-                grade, message, color = get_grade_info(stats['avg_accuracy'])
-
-                ttk.Label(
-                    class_frame,
-                    text=(
-                        f"Grade: {grade}\n"
-                        f"Sessions Completed: {stats['sessions']}\n"
-                        f"Average Accuracy: {stats['avg_accuracy']:.1f}%\n"
-                        f"Total Cards Studied: {stats['total_cards']}\n"
-                        f"{message}"
-                    ),
-                    font=("Arial", 12),
-                    foreground=color,
-                    justify="center"
-                ).pack(pady=5)
-
-        # Return button
         ttk.Button(
-            main_frame,
+            button_frame,
             text="🏠 Return to Main Menu",
             command=self.return_to_main,
             style="Action.TButton",
             width=25
-        ).pack(pady=20)
+        ).pack(anchor="center")
 
     def return_to_main(self):
         """Return to main menu"""
