@@ -3,3 +3,4 @@ settings.json
 .venv
 src/__pycache__/
 src/windows/__pycache__/
+study_stats.json
