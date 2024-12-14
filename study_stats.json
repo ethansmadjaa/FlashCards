@@ -22,5 +22,21 @@
             "correct": 13,
             "accuracy": 65.0
         }
+    ],
+    "Business Intelligence": [
+        {
+            "timestamp": "2024-12-14T16:40:50.243227",
+            "total_cards": 20,
+            "correct": 11,
+            "accuracy": 55.00000000000001
+        }
+    ],
+    "Big data frameworks": [
+        {
+            "timestamp": "2024-12-14T16:47:59.370587",
+            "total_cards": 20,
+            "correct": 11,
+            "accuracy": 55.00000000000001
+        }
     ]
 }
