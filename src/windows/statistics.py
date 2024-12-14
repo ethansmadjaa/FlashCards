@@ -1,8 +1,23 @@
 import tkinter as tk
 from tkinter import ttk
+
 from .base import BaseWindow
-from ..models import StudyStats
 from ..config import SETTINGS_WINDOW_SIZE
+from ..models import StudyStats
+
+
+def get_grade_info(accuracy):
+    """Get grade information based on accuracy"""
+    if accuracy >= 90:
+        return "A+", "Outstanding performance! 🌟", "#28a745"
+    elif accuracy >= 80:
+        return "A", "Excellent work! 🎯", "#218838"
+    elif accuracy >= 70:
+        return "B", "Good progress! 💪", "#17a2b8"
+    elif accuracy >= 60:
+        return "C", "Keep practicing! 📚", "#ffc107"
+    else:
+        return "D", "More study needed 💡", "#dc3545"
 
 
 class StatisticsWindow(BaseWindow):
@@ -90,7 +105,7 @@ class StatisticsWindow(BaseWindow):
                 class_frame.pack(fill="x", padx=5, pady=5)
 
                 stats = self.stats.get_class_stats(class_name)
-                grade, message, color = self.get_grade_info(stats['avg_accuracy'])
+                grade, message, color = get_grade_info(stats['avg_accuracy'])
 
                 ttk.Label(
                     class_frame,
@@ -115,22 +130,9 @@ class StatisticsWindow(BaseWindow):
             width=25
         ).pack(pady=20)
 
-    def get_grade_info(self, accuracy):
-        """Get grade information based on accuracy"""
-        if accuracy >= 90:
-            return "A+", "Outstanding performance! 🌟", "#28a745"
-        elif accuracy >= 80:
-            return "A", "Excellent work! 🎯", "#218838"
-        elif accuracy >= 70:
-            return "B", "Good progress! 💪", "#17a2b8"
-        elif accuracy >= 60:
-            return "C", "Keep practicing! 📚", "#ffc107"
-        else:
-            return "D", "More study needed 💡", "#dc3545"
-
     def return_to_main(self):
         """Return to main menu"""
         for widget in self.window.winfo_children():
             widget.destroy()
         from .app import FlashcardApp
-        FlashcardApp(self.window) 
+        FlashcardApp(self.window)
