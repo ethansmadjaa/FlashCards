@@ -348,11 +348,11 @@ class CardManagerWindow(BaseWindow):
             width=20
         ).pack(side="left", padx=5)
 
-        # Add new button for managing class names
+        # Add new button for checking duplicates
         ttk.Button(
             button_frame,
-            text="📝 Manage Classes",
-            command=self.manage_classes,
+            text="🔍 Check Duplicates",
+            command=self.check_duplicates,
             style="Action.TButton",
             width=20
         ).pack(side="left", padx=5)
@@ -713,3 +713,219 @@ class CardManagerWindow(BaseWindow):
             style="Action.TButton",
             width=20
         ).pack(side="left", padx=5)
+
+    def check_duplicates(self):
+        """Check for duplicate or similar cards"""
+        cards = safe_json_load(FLASHCARD_FILE, [])
+        if not cards:
+            messagebox.showinfo("Info", "No cards to check")
+            return
+
+        # Create a window to show duplicates
+        dup_window = tk.Toplevel(self.window)
+        dup_window.title("Duplicate Cards")
+        dup_window.geometry("1000x700")
+        dup_window.transient(self.window)
+
+        # Create main frame with padding
+        main_frame = ttk.Frame(dup_window, padding=10)
+        main_frame.pack(fill="both", expand=True)
+
+        # Add header
+        ttk.Label(
+            main_frame,
+            text="🔍 Duplicate Cards Checker",
+            font=("Arial", 16, "bold")
+        ).pack(pady=(0, 10))
+
+        # Create scrolled text widget
+        text_frame = ttk.Frame(main_frame)
+        text_frame.pack(fill="both", expand=True)
+
+        # Add duplicate pairs list
+        duplicates_frame = ttk.Frame(text_frame)
+        duplicates_frame.pack(fill="both", expand=True, pady=10)
+
+        # Create canvas for scrolling
+        canvas = tk.Canvas(duplicates_frame)
+        scrollbar = ttk.Scrollbar(duplicates_frame, orient="vertical", command=canvas.yview)
+        scrollable_frame = ttk.Frame(canvas)
+
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        # Check for duplicates
+        from ..services.ai_service import AICardGenerator
+        duplicates_found = []
+
+        # Group cards by class
+        class_cards = {}
+        for i, card in enumerate(cards):
+            class_name = card.get('class_name', 'Unknown')
+            if class_name not in class_cards:
+                class_cards[class_name] = []
+            class_cards[class_name].append((i, card))  # Store index with card
+
+        # Check duplicates within each class
+        for class_name, class_card_list in class_cards.items():
+            for i, (idx1, card1) in enumerate(class_card_list):
+                for idx2, card2 in class_card_list[i+1:]:
+                    q1 = card1['question'].lower().strip()
+                    q2 = card2['question'].lower().strip()
+                    a1 = card1['answer'].lower().strip()
+                    a2 = card2['answer'].lower().strip()
+                    
+                    question_similarity = AICardGenerator.check_similarity(q1, q2)
+                    answer_similarity = AICardGenerator.check_similarity(a1, a2)
+
+                    if question_similarity > 0.7 or answer_similarity > 0.7:
+                        duplicates_found.append({
+                            'class': class_name,
+                            'card1': {'index': idx1, 'card': card1},
+                            'card2': {'index': idx2, 'card': card2},
+                            'q_sim': question_similarity,
+                            'a_sim': answer_similarity
+                        })
+
+        if not duplicates_found:
+            ttk.Label(
+                scrollable_frame,
+                text="No duplicate cards found!",
+                font=("Arial", 12)
+            ).pack(pady=20)
+        else:
+            # Show each duplicate pair
+            for i, dup in enumerate(duplicates_found, 1):
+                pair_frame = ttk.LabelFrame(
+                    scrollable_frame,
+                    text=f"Potential Duplicate Pair {i} (Class: {dup['class']})",
+                    padding=10
+                )
+                pair_frame.pack(fill="x", pady=10, padx=5)
+
+                # Card 1
+                ttk.Label(
+                    pair_frame,
+                    text="Card 1:",
+                    font=("Arial", 11, "bold")
+                ).pack(anchor="w")
+                ttk.Label(
+                    pair_frame,
+                    text=f"Q: {dup['card1']['card']['question']}",
+                    wraplength=800
+                ).pack(anchor="w")
+                ttk.Label(
+                    pair_frame,
+                    text=f"A: {dup['card1']['card']['answer']}",
+                    wraplength=800
+                ).pack(anchor="w")
+
+                # Card 2
+                ttk.Label(
+                    pair_frame,
+                    text="Card 2:",
+                    font=("Arial", 11, "bold")
+                ).pack(anchor="w", pady=(10, 0))
+                ttk.Label(
+                    pair_frame,
+                    text=f"Q: {dup['card2']['card']['question']}",
+                    wraplength=800
+                ).pack(anchor="w")
+                ttk.Label(
+                    pair_frame,
+                    text=f"A: {dup['card2']['card']['answer']}",
+                    wraplength=800
+                ).pack(anchor="w")
+
+                # Similarity info
+                ttk.Label(
+                    pair_frame,
+                    text=f"Similarity - Question: {dup['q_sim']:.2f}, Answer: {dup['a_sim']:.2f}",
+                    font=("Arial", 10, "italic")
+                ).pack(pady=(5, 10))
+
+                # Action buttons
+                btn_frame = ttk.Frame(pair_frame)
+                btn_frame.pack(fill="x")
+
+                def create_keep_command(dup_info, keep_idx):
+                    def command():
+                        self.handle_duplicate(dup_info, keep_idx)
+                    return command
+
+                ttk.Button(
+                    btn_frame,
+                    text="Keep Card 1",
+                    command=create_keep_command(dup, 1),
+                    width=15
+                ).pack(side="left", padx=5)
+
+                ttk.Button(
+                    btn_frame,
+                    text="Keep Card 2",
+                    command=create_keep_command(dup, 2),
+                    width=15
+                ).pack(side="left", padx=5)
+
+                ttk.Button(
+                    btn_frame,
+                    text="Keep Both",
+                    command=create_keep_command(dup, 0),
+                    width=15
+                ).pack(side="left", padx=5)
+
+        # Pack canvas and scrollbar
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        # Add close button at bottom
+        ttk.Button(
+            main_frame,
+            text="Close",
+            command=dup_window.destroy,
+            style="Action.TButton",
+            width=20
+        ).pack(pady=10)
+
+    def handle_duplicate(self, dup_info, keep_card):
+        """Handle duplicate card resolution"""
+        cards = safe_json_load(FLASHCARD_FILE, [])
+        
+        # Find the duplicate window
+        dup_window = None
+        for widget in self.window.winfo_children():
+            if isinstance(widget, tk.Toplevel) and widget.title() == "Duplicate Cards":
+                dup_window = widget
+                break
+
+        if not dup_window:
+            return
+
+        # Handle the action
+        if keep_card == 0:  # Keep both
+            if messagebox.askyesno("Confirm", "Keep both cards?"):
+                # No need to modify cards, but refresh displays
+                messagebox.showinfo("Info", "Keeping both cards")
+                # Destroy and recreate the duplicates window to refresh it
+                dup_window.destroy()
+                self.check_duplicates()
+        else:
+            # Determine which card to remove
+            remove_idx = dup_info['card2']['index'] if keep_card == 1 else dup_info['card1']['index']
+            
+            # Remove the card
+            if messagebox.askyesno("Confirm", "Are you sure you want to delete the selected card?"):
+                cards.pop(remove_idx)
+                if save_json(FLASHCARD_FILE, cards):
+                    messagebox.showinfo("Success", "Card deleted successfully!")
+                    self.load_cards()  # Refresh the main window display
+                    # Destroy and recreate the duplicates window to refresh it
+                    dup_window.destroy()
+                    self.check_duplicates()
+                else:
+                    messagebox.showerror("Error", "Failed to delete card")
