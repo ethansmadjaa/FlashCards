@@ -234,6 +234,186 @@
     "difficulty": "easy"
   },
   {
+    "question": "What is data preprocessing?",
+    "answer": "Data preprocessing involves cleaning, transforming, and preparing raw data to make it suitable for machine learning models.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of handling missing values during data preprocessing?",
+    "answer": "Handling missing values ensures that the dataset is complete and accurate, preventing issues during model training.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are two common techniques for handling missing data?",
+    "answer": "The two common techniques are imputation (e.g., mean, median, or mode) and removing rows or columns with missing values.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is one-hot encoding?",
+    "answer": "One-hot encoding converts categorical variables into binary columns where each unique category becomes a separate feature.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the difference between one-hot encoding and label encoding?",
+    "answer": "One-hot encoding creates binary columns for each category, while label encoding assigns an integer value to each category.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Why is feature scaling important in machine learning?",
+    "answer": "Feature scaling ensures that all features contribute equally to the model, preventing features with larger scales from dominating the learning process.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the difference between normalization and standardization?",
+    "answer": "Normalization scales data to a range (e.g., [0, 1]), while standardization scales data to have a mean of 0 and a standard deviation of 1.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the purpose of feature engineering?",
+    "answer": "Feature engineering creates new features or modifies existing ones to improve the performance of machine learning models.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the role of data cleaning in preprocessing?",
+    "answer": "Data cleaning involves removing errors, inconsistencies, and duplicates to ensure data quality.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of the train-test split?",
+    "answer": "Train-test split divides the dataset into training and testing subsets to evaluate model performance on unseen data.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is dimensionality reduction?",
+    "answer": "Dimensionality reduction reduces the number of features while preserving as much information as possible.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Why is it important to detect and remove outliers in data preprocessing?",
+    "answer": "Outliers can distort the results of machine learning models, leading to poor performance and inaccurate predictions.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is a pipeline in machine learning preprocessing?",
+    "answer": "A pipeline automates a sequence of preprocessing steps, ensuring consistent and repeatable data preparation.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does the Min-Max scaling method work?",
+    "answer": "Min-Max scaling scales data to a specific range, typically [0, 1], using the formula: (x - min) / (max - min).",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of the `StandardScaler` in Scikit-Learn?",
+    "answer": "`StandardScaler` standardizes features by removing the mean and scaling to unit variance.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are the three main components of machine learning?",
+    "answer": "The three main components are features, data, and algorithms.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are the two categories of classical machine learning algorithms?",
+    "answer": "The two categories are supervised learning and unsupervised learning.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which algorithms can be used for classification tasks?",
+    "answer": "Algorithms such as logistic regression, random forest, and decision trees can be used for classification tasks.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In linear regression, what do the terms θ₀ and θ₁ represent?",
+    "answer": "θ₀ represents the y-intercept, and θ₁ represents the slope of the line.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How can you determine if gradient descent has converged?",
+    "answer": "Gradient descent has converged when the cost function stops decreasing significantly.",
+    "class_name": "Machine Learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which equation does NOT represent the calculation of a cost function?",
+    "answer": "The equation `x' = (x - min(x)) / (max(x) - min(x))` does not represent a cost function.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What metric is used to evaluate the quality of a classification algorithm?",
+    "answer": "Metrics such as precision, recall, and AUC (area under the ROC curve) are used to evaluate classification algorithms.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the precision and recall of an algorithm given TP = 75%, FP = 13%, and FN = 20%?",
+    "answer": "Precision = 75% and Recall = 67%.",
+    "class_name": "Machine Learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does the Lasso regression technique apply?",
+    "answer": "Lasso regression applies L1 regularization, which can shrink some coefficients to zero.",
+    "class_name": "Machine Learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the purpose of the GridSearchCV function?",
+    "answer": "GridSearchCV finds the best combination of hyperparameters by performing cross-validation on a grid of possible values.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does the Gini Index measure in decision trees?",
+    "answer": "The Gini Index measures the degree of impurity in a node or dataset.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the minimum possible value of the Gini Index for a pure node?",
+    "answer": "The minimum possible value of the Gini Index for a pure node is 0.",
+    "class_name": "Machine Learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is bagging in ensemble methods?",
+    "answer": "Bagging is a technique that trains multiple models on random subsets of data and averages their predictions to reduce variance.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is boosting in ensemble methods?",
+    "answer": "Boosting trains models sequentially, where each model corrects the errors of the previous one to improve overall accuracy.",
+    "class_name": "Machine Learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does the Gradient Boosting algorithm function?",
+    "answer": "Gradient Boosting trains models sequentially, with each model correcting the errors of the previous one.",
+    "class_name": "Machine Learning",
+    "difficulty": "hard"
+  },
+  {
     "question": "What is Big Data in the context of traditional computer science?",
     "answer": "Big Data refers to data that will not fit in main memory.",
     "class_name": "Big data frameworks",
