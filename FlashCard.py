@@ -1,6 +1,10 @@
 import tkinter as tk
 import os
 import sys
+import warnings
+
+# Suppress all warnings
+warnings.filterwarnings('ignore')
 
 # Suppress macOS IMK messages
 if sys.platform == 'darwin':  # Check if running on macOS
