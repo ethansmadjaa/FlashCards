@@ -37,8 +37,10 @@ class FlashcardApp(BaseWindow):
         buttons = [
             ("📖 Study Now", self.open_study_window),
             ("➕ Add Cards", self.open_add_cards),
+            ("🤖 Generate Cards", self.open_generate_cards),
             ("📝 Manage Cards", self.open_card_manager),
             ("📊 Statistics", self.open_statistics),
+            ("📈 Visualizations", self.open_visualizations),
             ("⚙️ Settings", self.open_settings)
         ]
 
@@ -81,3 +83,17 @@ class FlashcardApp(BaseWindow):
             widget.destroy()
         from .statistics import StatisticsWindow
         StatisticsWindow(self.window)
+
+    def open_visualizations(self) -> None:
+        """Open visualizations window"""
+        for widget in self.window.winfo_children():
+            widget.destroy()
+        from .visualization import VisualizationWindow
+        VisualizationWindow(self.window)
+
+    def open_generate_cards(self) -> None:
+        """Open card generation window"""
+        for widget in self.window.winfo_children():
+            widget.destroy()
+        from .generate_cards import GenerateCardsWindow
+        GenerateCardsWindow(self.window)
