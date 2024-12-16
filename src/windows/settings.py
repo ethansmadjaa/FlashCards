@@ -175,8 +175,13 @@ class SettingsWindow(BaseWindow):
             'cards_per_session': self.cards_per_session_var.get(),
             'show_progress': self.show_progress_var.get()
         }
+        
+        print(f"DEBUG: Saving settings: {new_settings}")  # Debug print
 
         if save_settings(new_settings):
+            # Update the singleton instance
+            self.settings.settings.update(new_settings)
+            
             messagebox.showinfo(
                 "Success",
                 "✅ Settings saved successfully!\n"
