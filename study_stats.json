@@ -13,6 +13,30 @@
             "total_cards": 20,
             "correct": 10,
             "accuracy": 50.0
+        },
+        {
+            "timestamp": "2024-12-16T14:29:03.088221",
+            "total_cards": 20,
+            "correct": 9,
+            "accuracy": 45.0
+        },
+        {
+            "timestamp": "2024-12-16T14:57:54.920143",
+            "total_cards": 20,
+            "correct": 15,
+            "accuracy": 75.0
+        },
+        {
+            "timestamp": "2024-12-16T17:13:21.618489",
+            "total_cards": 8,
+            "correct": 7,
+            "accuracy": 87.5
+        },
+        {
+            "timestamp": "2024-12-16T17:22:09.053198",
+            "total_cards": 40,
+            "correct": 33,
+            "accuracy": 82.5
         }
     ],
     "Machine Learning": [
@@ -21,6 +45,18 @@
             "total_cards": 20,
             "correct": 13,
             "accuracy": 65.0
+        },
+        {
+            "timestamp": "2024-12-16T11:52:00.029749",
+            "total_cards": 20,
+            "correct": 17,
+            "accuracy": 85.0
+        },
+        {
+            "timestamp": "2024-12-16T17:40:03.765952",
+            "total_cards": 39,
+            "correct": 30,
+            "accuracy": 76.92307692307693
         }
     ],
     "Business Intelligence": [
@@ -37,6 +73,12 @@
             "total_cards": 20,
             "correct": 11,
             "accuracy": 55.00000000000001
+        },
+        {
+            "timestamp": "2024-12-16T12:23:21.765184",
+            "total_cards": 20,
+            "correct": 18,
+            "accuracy": 90.0
         }
     ]
 }
