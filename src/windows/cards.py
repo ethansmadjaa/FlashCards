@@ -348,6 +348,15 @@ class CardManagerWindow(BaseWindow):
             width=20
         ).pack(side="left", padx=5)
 
+        # Add new button for managing class names
+        ttk.Button(
+            button_frame,
+            text="📝 Manage Classes",
+            command=self.manage_classes,
+            style="Action.TButton",
+            width=20
+        ).pack(side="left", padx=5)
+
         ttk.Button(
             button_frame,
             text="↩️ Return to Main Menu",
@@ -364,6 +373,8 @@ class CardManagerWindow(BaseWindow):
 
         # Load cards
         cards = safe_json_load(FLASHCARD_FILE, [])
+        
+        # Insert cards with new indices
         for i, card in enumerate(cards):
             self.tree.insert(
                 "",
@@ -394,23 +405,45 @@ class CardManagerWindow(BaseWindow):
         selected_class = self.class_var.get()
         search_term = self.search_entry.get().lower()
 
+        # First, clear the tree
         for item in self.tree.get_children():
-            values = self.tree.item(item)["values"]
-            class_match = selected_class == "All Classes" or values[0] == selected_class
-            search_match = not search_term or any(
-                search_term in str(v).lower() for v in values
+            self.tree.delete(item)
+
+        # Load all cards
+        cards = safe_json_load(FLASHCARD_FILE, [])
+
+        # Insert only matching cards
+        for i, card in enumerate(cards):
+            # Check class match
+            class_match = (selected_class == "All Classes" or 
+                          card.get("class_name", "") == selected_class)
+            
+            # Check search match in all fields
+            search_match = (
+                not search_term or  # If no search term, consider it a match
+                search_term in card.get("class_name", "").lower() or
+                search_term in card.get("question", "").lower() or
+                search_term in card.get("answer", "").lower()
             )
 
+            # Insert if both conditions match
             if class_match and search_match:
-                self.tree.reattach(item, "", "end")
-            else:
-                self.tree.detach(item)
+                self.tree.insert(
+                    "",
+                    "end",
+                    values=(
+                        card.get("class_name", ""),
+                        card.get("question", ""),
+                        card.get("answer", "")
+                    ),
+                    iid=str(i)
+                )
 
     def clear_filters(self):
-        """Clear all filters"""
-        self.search_entry.delete(0, "end")
-        self.class_filter.set("All Classes")
-        self.load_cards()
+        """Clear all filters and show all cards"""
+        self.class_var.set("All Classes")
+        self.search_entry.delete(0, tk.END)
+        self.load_cards()  # Reload all cards
 
     def sort_column(self, col):
         """Sort treeview by column"""
@@ -440,9 +473,24 @@ class CardManagerWindow(BaseWindow):
 
         # Create edit form
         ttk.Label(edit_window, text="Class:", font=("Arial", 11)).pack(pady=(20, 5))
-        class_entry = ttk.Entry(edit_window, width=40, font=("Arial", 11))
-        class_entry.insert(0, class_name)
-        class_entry.pack(pady=(0, 10))
+        
+        # Create combobox for class selection
+        class_var = tk.StringVar(value=class_name)
+        class_combobox = ttk.Combobox(
+            edit_window,
+            textvariable=class_var,
+            width=40,
+            font=("Arial", 11),
+            state="readonly"  # Make it readonly to prevent typos
+        )
+        
+        # Get available classes
+        available_classes = sorted(get_available_classes())
+        if class_name not in available_classes:
+            available_classes.append(class_name)
+        class_combobox['values'] = sorted(available_classes)
+        
+        class_combobox.pack(pady=(0, 10))
 
         ttk.Label(edit_window, text="Question:", font=("Arial", 11)).pack(pady=(10, 5))
         question_text = scrolledtext.ScrolledText(
@@ -460,7 +508,7 @@ class CardManagerWindow(BaseWindow):
 
         def save_changes():
             # Get updated values
-            new_class = class_entry.get().strip()
+            new_class = class_var.get()
             new_question = question_text.get("1.0", "end-1c").strip()
             new_answer = answer_text.get("1.0", "end-1c").strip()
 
@@ -520,6 +568,10 @@ class CardManagerWindow(BaseWindow):
                 "Confirm Delete",
                 "Are you sure you want to delete this card?"
         ):
+            # Save current filter state
+            current_class = self.class_var.get()
+            current_search = self.search_entry.get()
+
             # Delete from file
             cards = safe_json_load(FLASHCARD_FILE, [])
             index = int(selected[0])
@@ -527,7 +579,31 @@ class CardManagerWindow(BaseWindow):
 
             if save_json(FLASHCARD_FILE, cards):
                 messagebox.showinfo("Success", "Card deleted successfully!")
-                self.load_cards()
+                
+                # Clear and reload cards
+                for item in self.tree.get_children():
+                    self.tree.delete(item)
+                    
+                # Reload cards with new indices
+                for i, card in enumerate(cards):
+                    self.tree.insert(
+                        "",
+                        "end",
+                        values=(
+                            card.get("class_name", ""),
+                            card.get("question", ""),
+                            card.get("answer", "")
+                        ),
+                        iid=str(i)
+                    )
+                
+                # Restore filter state
+                self.class_var.set(current_class)
+                self.search_entry.insert(0, current_search)
+                
+                # Reapply filters if they were active
+                if current_class != "All Classes" or current_search:
+                    self.apply_filters()
             else:
                 messagebox.showerror("Error", "Failed to delete card")
 
@@ -537,3 +613,103 @@ class CardManagerWindow(BaseWindow):
             widget.destroy()
         from .app import FlashcardApp
         FlashcardApp(self.window)
+
+    def manage_classes(self):
+        """Open window to manage class names"""
+        manage_window = tk.Toplevel(self.window)
+        manage_window.title("Manage Classes")
+        manage_window.geometry("500x400")
+        manage_window.transient(self.window)
+        manage_window.grab_set()
+
+        # Get current classes
+        classes = sorted(get_available_classes())
+
+        # Create listbox for classes
+        ttk.Label(
+            manage_window,
+            text="Select class to rename:",
+            font=("Arial", 12)
+        ).pack(pady=10)
+
+        class_listbox = tk.Listbox(
+            manage_window,
+            width=40,
+            height=10,
+            font=("Arial", 11)
+        )
+        class_listbox.pack(pady=10, padx=20)
+
+        # Populate listbox
+        for class_name in classes:
+            class_listbox.insert(tk.END, class_name)
+
+        # New name entry
+        ttk.Label(
+            manage_window,
+            text="New class name:",
+            font=("Arial", 12)
+        ).pack(pady=5)
+
+        new_name_entry = ttk.Entry(
+            manage_window,
+            width=40,
+            font=("Arial", 11)
+        )
+        new_name_entry.pack(pady=5)
+
+        def rename_class():
+            selection = class_listbox.curselection()
+            if not selection:
+                messagebox.showwarning("Warning", "Please select a class to rename")
+                return
+
+            old_name = class_listbox.get(selection[0])
+            new_name = new_name_entry.get().strip()
+
+            if not new_name:
+                messagebox.showwarning("Warning", "Please enter a new class name")
+                return
+
+            if new_name in classes and new_name != old_name:
+                messagebox.showwarning("Warning", "This class name already exists")
+                return
+
+            # Update all cards with this class name
+            cards = safe_json_load(FLASHCARD_FILE, [])
+            changes_made = False
+
+            for card in cards:
+                if card.get("class_name") == old_name:
+                    card["class_name"] = new_name
+                    changes_made = True
+
+            if changes_made:
+                if save_json(FLASHCARD_FILE, cards):
+                    messagebox.showinfo("Success", f"Renamed class '{old_name}' to '{new_name}'")
+                    manage_window.destroy()
+                    self.load_cards()  # Refresh the card list
+                else:
+                    messagebox.showerror("Error", "Failed to save changes")
+            else:
+                messagebox.showinfo("Info", "No cards found with this class name")
+
+        # Button frame
+        button_frame = ttk.Frame(manage_window)
+        button_frame.pack(pady=20)
+
+        ttk.Button(
+            button_frame,
+            text="✅ Rename Class",
+            command=rename_class,
+            style="Action.TButton",
+            width=20
+        ).pack(side="left", padx=5)
+
+        ttk.Button(
+            button_frame,
+            text="❌ Cancel",
+            command=manage_window.destroy,
+            style="Action.TButton",
+            width=20
+        ).pack(side="left", padx=5)
