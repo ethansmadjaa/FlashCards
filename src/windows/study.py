@@ -38,9 +38,10 @@ class StudyWindow(BaseWindow):
     def __init__(self, parent, class_name: str = None):
         super().__init__(parent, f"Study: {class_name or 'All Classes'}", STUDY_WINDOW_SIZE)
 
-        # Get settings
+        # Get settings first
         settings = Settings()
         cards_per_session = settings.get('cards_per_session', DEFAULT_CARDS_PER_SESSION)
+        print(f"DEBUG: Cards per session setting: {cards_per_session}")  # Debug print
 
         # Basic attributes
         self.wrong_btn = None
@@ -59,7 +60,7 @@ class StudyWindow(BaseWindow):
             random.shuffle(all_cards)
             # Take only the number of cards specified in settings
             self.cards = all_cards[:cards_per_session]
-            print(f"DEBUG: Selected {len(self.cards)} cards from {len(all_cards)} available")
+            print(f"DEBUG: Selected {len(self.cards)} cards from {len(all_cards)} available")  # Debug print
         else:
             self.cards = []
 
