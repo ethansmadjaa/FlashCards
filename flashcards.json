@@ -78,12 +78,6 @@
         "difficulty": "hard"
     },
     {
-        "question": "What is the cost function in logistic regression?",
-        "answer": "The cost function in logistic regression is the log-loss or cross-entropy, which measures the difference between predicted probabilities and actual labels.",
-        "class_name": "Machine Learning",
-        "difficulty": "medium"
-    },
-    {
         "question": "What is the purpose of gradient descent?",
         "answer": "Gradient descent minimizes the cost function by iteratively adjusting model parameters in the direction of the steepest descent.",
         "class_name": "Machine Learning",
@@ -966,12 +960,6 @@
         "difficulty": "medium"
     },
     {
-        "question": "What is a fact in a data warehouse?",
-        "answer": "A fact is a collection of related measures and their associated dimensions.",
-        "class_name": "Business Intelligence",
-        "difficulty": "easy"
-    },
-    {
         "question": "What are dimension hierarchies?",
         "answer": "Dimension hierarchies are structures that organize dimensions into multiple levels of aggregation.",
         "class_name": "Business Intelligence",
@@ -1768,5 +1756,137 @@
         "question": "What is a colormap in Matplotlib?",
         "answer": "A colormap is a range of colors used to represent data values in visualizations, e.g., the 'viridis' colormap.",
         "class_name": "Data Visualization"
+    },
+    {
+        "question": "What is deep learning?",
+        "answer": "Deep learning is a subfield of machine learning inspired by the structure and function of the human brain, used in applications such as image recognition, natural language processing, and autonomous driving.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are perceptrons and artificial neurons?",
+        "answer": "Perceptrons are basic building blocks of neural networks that mimic biological neurons in their functioning.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are activation functions in neural networks?",
+        "answer": "Activation functions like ReLU, sigmoid, and tanh introduce non-linearity in neural networks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is forward and backward propagation in neural networks?",
+        "answer": "Forward propagation is the process of passing input data through the network, while backward propagation adjusts weights through backpropagation based on the calculated error.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are loss functions and optimizers in deep learning?",
+        "answer": "Loss functions like Mean Squared Error and optimizers like SGD and Adam guide the learning process in neural networks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How does gradient descent help in training neural networks?",
+        "answer": "Gradient descent is a optimization algorithm that minimizes the loss function, helping in effective training of neural networks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are feedforward neural networks (FNN) used for?",
+        "answer": "Feedforward neural networks involve fully connected layers and are often used for simple classification tasks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do convolutional neural networks (CNN) excel in deep learning?",
+        "answer": "CNNs excel in image recognition tasks through feature extraction and pooling layers.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the role of recurrent neural networks (RNN) in processing data?",
+        "answer": "RNNs are used for processing sequential data like text and time series due to their ability to retain memory of past inputs.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do Long Short-Term Memory (LSTM) networks address vanishing gradients?",
+        "answer": "LSTM networks are designed to address the vanishing gradient problem and handle long-term dependencies in data sequences.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Which frameworks are commonly used for deep learning tasks?",
+        "answer": "TensorFlow and PyTorch are popular frameworks for building and training neural networks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What techniques help in model evaluation and preventing overfitting in deep learning?",
+        "answer": "Techniques like dropout, regularization, and early stopping are used to evaluate models and prevent overfitting.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the main focus of deep learning?",
+        "answer": "Deep learning is a subfield of machine learning inspired by the human brain.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are perceptrons in neural networks?",
+        "answer": "Perceptrons are basic building blocks that mimic biological neurons.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why are activation functions important in neural networks?",
+        "answer": "Activation functions enable non-linearity in neural networks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is backpropagation in neural networks?",
+        "answer": "Backpropagation adjusts weights to help neural networks learn.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do loss functions guide learning in neural networks?",
+        "answer": "Loss functions like Mean Squared Error guide learning by measuring error.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the purpose of optimizers in neural networks?",
+        "answer": "Optimizers like SGD and Adam help in updating neural network weights efficiently.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What do feedforward neural networks focus on?",
+        "answer": "Feedforward neural networks deal with fully connected layers and simple tasks.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do convolutional neural networks excel in?",
+        "answer": "CNNs excel in image recognition through feature extraction and pooling.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the role of recurrent neural networks?",
+        "answer": "RNNs are used for processing sequential data like text and time series.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do LSTM networks address vanishing gradients?",
+        "answer": "LSTM networks handle long-term dependencies by preventing vanishing gradients.",
+        "class_name": "Deep learning",
+        "difficulty": "mixed"
     }
 ]
