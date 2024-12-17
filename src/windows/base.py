@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from ..config import STYLES
+from ..services.theme_service import ThemeService
 
 
 def setup_styles() -> None:
@@ -46,6 +47,20 @@ class BaseWindow:
         self.window.geometry(geometry)
         setup_styles()
         self.center_window()  # Center window on creation
+
+        # Appliquer le thème
+        ThemeService.apply_theme(self.window)
+        
+        # Configurer la détection des changements de thème système
+        self.window.bind('<Expose>', lambda e: self._check_theme())
+        self._current_theme = ThemeService.get_system_theme()
+
+    def _check_theme(self):
+        """Vérifie si le thème système a changé"""
+        new_theme = ThemeService.get_system_theme()
+        if new_theme != self._current_theme:
+            self._current_theme = new_theme
+            ThemeService.apply_theme(self.window)
 
     def create_main_frame(self, padding: int = 20) -> ttk.Frame:
         """Create and return a main container frame"""
