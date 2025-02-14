@@ -1888,5 +1888,365 @@
         "answer": "LSTM networks handle long-term dependencies by preventing vanishing gradients.",
         "class_name": "Deep learning",
         "difficulty": "mixed"
+    },
+    {
+        "question": "What are the main traits measured in the Big Five personality model?",
+        "answer": "Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How do mainstream academic psychologists typically use the trait-based approach?",
+        "answer": "Traits are measured on continuous scales",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is a limitation of the trait-based approach in personality assessment?",
+        "answer": "Does not measure ability or skill",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the focus of the MBTI personality assessment tool?",
+        "answer": "Four binary dimensions like Introversion/Extraversion",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is a common strength of type-based approaches like MBTI and HBDI?",
+        "answer": "Provide a shared language for introspection",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How does HBDI aim to measure a person's thinking style?",
+        "answer": "Analytical, Sequential, Interpersonal, Imaginative",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is a common limitation of type-based approaches like MBTI and HBDI?",
+        "answer": "Types do not guarantee job performance prediction",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How many intelligences does Howard Gardner's theory list?",
+        "answer": "Eight intelligences",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is emphasized in Howard Gardner's theory of multiple intelligences?",
+        "answer": "Individuals display different strengths",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How does Gardner's theory of multiple intelligences help managers?",
+        "answer": "Spot and leverage diverse talents in teams",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is Donald Super\u2019s Work Values Inventory?",
+        "answer": "An inventory that identifies values like Creativity, Achievement, Way of Life, Prestige, Altruism, Security.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can managers use work values to understand employees?",
+        "answer": "By recognizing values like Creativity, Achievement, Way of Life, Prestige, Altruism, Security that motivate them.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What does the example from Paycom illustrate?",
+        "answer": "Identifying core values like Winning, Lead, Grit, Serve, Learn helps align teams by communicating and living these values.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is it important for companies to list corporate values like Winning, Lead, Grit, Serve, Learn?",
+        "answer": "It helps in aligning teams and creating a shared understanding of values that drive the organization forward.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What does NLP stand for?",
+        "answer": "Neuro-Linguistic Programming",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Who developed the general model of NLP?",
+        "answer": "Richard Bandler and John Grinder",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What aspect does 'Neuro' in NLP emphasize?",
+        "answer": "Neurological activity driving thoughts/behaviors",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How does NLP view 'Linguistic'?",
+        "answer": "Language shapes and reflects how we think, including nonverbal cues",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What does 'Programming' refer to in NLP?",
+        "answer": "Running mental software that can be updated or reprogrammed",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are some purposes of NLP?",
+        "answer": "Improving self-awareness, supporting change, enhancing communication and influence",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are some criticisms of NLP?",
+        "answer": "Pseudoscience concerns, risk of manipulation, unregulated field",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is 'Neuro' in the name of NLP somewhat misleading?",
+        "answer": "NLP does not directly map to formal neuroscience",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the risk associated with the unregulated nature of NLP?",
+        "answer": "Varying training quality and potential for unethical practices",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What does the phrase 'The Map Is Not the Territory' mean?",
+        "answer": "Each person's perception differs from objective reality.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is behavior considered coherent with one's worldview?",
+        "answer": "A person always chooses the best option in their view.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the significance of 'More Choices = Greater Control'?",
+        "answer": "Having more choices leads to greater control.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is communication constant according to NLP?",
+        "answer": "You cannot not communicate.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can you discover another person through their worldview?",
+        "answer": "Meet them 'where they are.'",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is unconscious communication emphasized in NLP?",
+        "answer": "It is often more powerful than words.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What determines the meaning of a message in NLP?",
+        "answer": "The response it elicits.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What do eye accessing cues help infer in NLP?",
+        "answer": "How someone recalls or constructs images, sounds, or feelings.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the purpose of synchronizing in NLP?",
+        "answer": "To build unconscious rapport.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the concept of 'Pacing and Leading' in NLP?",
+        "answer": "First match the other person's style, then guide them in your direction.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How does anchoring relate to Pavlovian conditioning in NLP?",
+        "answer": "It pairs a stimulus with a desired internal state for later triggering.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the purpose of reframing in NLP?",
+        "answer": "To change the context in which an event is perceived.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is Transactional Analysis (TA)?",
+        "answer": "A theory of personality and communication analyzing interactions and ego states.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are the three ego states in TA?",
+        "answer": "Parent (P), Adult (A), Child (C) with different characteristics and behaviors.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can contamination occur in TA?",
+        "answer": "When the Parent or Child overpowers the Adult, leading to bias or delusion.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Explain the concept of exclusion in TA.",
+        "answer": "Excluding one ego state entirely, like the Child, can hinder certain experiences.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are the four life positions in TA?",
+        "answer": "I'm OK / You're OK, I'm OK / You're NOT OK, I'm NOT OK / You're OK, I'm NOT OK / You're NOT OK.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is moving toward 'I'm OK / You're OK' important in TA?",
+        "answer": "It promotes healthier communication and mutual acceptance.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are complementary transactions in TA?",
+        "answer": "When ego states match the expected responses, enhancing communication.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Describe crossed transactions in TA.",
+        "answer": "When responses come from unexpected ego states, causing confusion.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Explain the concept of duplex transactions in TA.",
+        "answer": "Involves both overt and covert levels of communication simultaneously.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Who is the founder of Transactional Analysis?",
+        "answer": "Eric Berne, author of Games People Play.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can TA help in management?",
+        "answer": "By understanding behavior patterns and improving communication through ego state recognition.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What ethical considerations are important in using TA?",
+        "answer": "Responsibility in shifting self-perception and potential for misuse.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the main goal of Process Communication?",
+        "answer": "To observe and categorize how each person communicates and identify ways to shift into more productive communication channels.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Describe the Thinker / Workaholic personality type.",
+        "answer": "Logical, methodical, craves recognition for work, can become perfectionistic under stress.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is the key characteristic of the Persister personality type?",
+        "answer": "Strong convictions, sees the world in terms of opinions and values, needs recognition for those convictions.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Explain the Imaginer / Dreamer personality type.",
+        "answer": "Calm, reflective, needs solitude, can become passive under stress.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are the characteristics of the Rebel personality type?",
+        "answer": "Creative, spontaneous, playful; needs stimulation and fun; can blame others or get stuck if stressed.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Describe the Promoter personality type.",
+        "answer": "Direct, enterprising, action-driven; craves excitement and novel challenges.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Explain the characteristics of the Harmonizer / Empathizer personality type.",
+        "answer": "Warm, sensitive, focuses on feelings; needs recognition for personhood and sensorial comfort.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can using the correct communication channel for a person's base type improve effectiveness?",
+        "answer": "It fosters more effective communication by catering to their preferred communication style.",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What are the 5 'drivers' mentioned in the class?",
+        "answer": "Be Perfect, Hurry Up, Be Strong, Please Others, Try Hard",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What happens to each 'driver' when a person is stressed?",
+        "answer": "Each driver intensifies",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is it risky to rely too heavily on a single model?",
+        "answer": "None should fully define a person",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What potential issue is associated with certain approaches like NLP?",
+        "answer": "History of misuse or unsubstantiated claims",
+        "class_name": "Management",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "What is required for real-life communication, motivation, and leadership?",
+        "answer": "Multiple lenses, empathy, and continuous feedback",
+        "class_name": "Management",
+        "difficulty": "mixed"
     }
 ]
