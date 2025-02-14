@@ -143,11 +143,12 @@ class AICardGenerator:
         - Questions must be unique
         - Answers must be clear but brief
 
-        Return the array starting with [ and ending with ], no other text."""
+        Return the array starting with [ and ending with ], no other text.
+        """
 
         try:
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[
                     {
                         "role": "system",
