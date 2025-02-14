@@ -6,3 +6,4 @@ src/windows/__pycache__/
 study_stats.json
 .env
 src/services/__pycache__/
+study_stats.json
