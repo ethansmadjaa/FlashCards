@@ -2248,5 +2248,35 @@
         "answer": "Multiple lenses, empathy, and continuous feedback",
         "class_name": "Management",
         "difficulty": "mixed"
+    },
+    {
+        "question": "What is the significance of the color red in marketing?",
+        "answer": "Red is often associated with passion, energy, and excitement, making it attention-grabbing in marketing.",
+        "class_name": "Marketing",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can the color blue be utilized in marketing strategies?",
+        "answer": "Blue conveys trust, reliability, and professionalism, making it suitable for corporate branding.",
+        "class_name": "Marketing",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "Why is the color yellow commonly used in marketing for certain industries?",
+        "answer": "Yellow is associated with positivity, happiness, and creativity, making it appealing for industries like childcare and entertainment.",
+        "class_name": "Marketing",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "How can marketers use the color green to communicate messages effectively?",
+        "answer": "Green symbolizes nature, growth, and health, making it ideal for eco-friendly and organic products.",
+        "class_name": "Marketing",
+        "difficulty": "mixed"
+    },
+    {
+        "question": "In marketing, what emotions are often linked to the color pink?",
+        "answer": "Pink is associated with romance, sweetness, and femininity, making it popular in beauty and fashion industries.",
+        "class_name": "Marketing",
+        "difficulty": "mixed"
     }
 ]
